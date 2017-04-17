@@ -10,10 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.net.URI;
+
 public class TabFragment1 extends Fragment {
 
     Button btnCreateEntry;
-    NoteManager mNoteManager;
     DiaryEntry mDiaryEntry;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,9 +32,10 @@ public class TabFragment1 extends Fragment {
 
 
     private void saveState() {
+
         String title = "title";//(String) mCategory.getSelectedItem();
         String content = "content";//mTitleText.getText().toString();
-        int id = 1;//mBodyText.getText().toString();
+        //int id = 3;//mBodyText.getText().toString();
         String dateCreated = "11/2/12";
         String dateModified = "1/9/99";
 
@@ -45,7 +47,7 @@ public class TabFragment1 extends Fragment {
         //}
 
         ContentValues values = new ContentValues();
-        values.put(DiaryEntryTableUtil.COLUMN_ID, id);
+        //values.put(DiaryEntryTableUtil.COLUMN_ID, id);
         values.put(DiaryEntryTableUtil.COLUMN_TITLE, title);
         values.put(DiaryEntryTableUtil.COLUMN_CONTENTS, content);
         values.put(DiaryEntryTableUtil.COLUMN_DATE_CREATED, dateCreated);
@@ -53,11 +55,12 @@ public class TabFragment1 extends Fragment {
 
         //if (todoUri == null) {
             // New todo
-            Uri todoUri =  getContext().getContentResolver().insert(
+
+        Uri todoUri  = Uri.parse(DiaryEntryContentProvider.CONTENT_ITEM_TYPE);
+        getContext().getContentResolver().insert(
                     DiaryEntryContentProvider.CONTENT_URI, values);
         //} else {
           //  // Update todo
-            //getContext().getContentResolver().update(todoUri, values, null, null);
         //}
     }
 }

@@ -1,31 +1,29 @@
 package com.eraisedtox94.smartdiary;
 
-import android.content.CursorLoader;
+
+import android.support.v4.content.CursorLoader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.ListView;
+import android.support.v4.widget.SimpleCursorAdapter;
 
 /**
  * Created by spraful on 4/5/2017.
  */
-public class TabFragment2 extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class TabFragment2 extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private SimpleCursorAdapter adapter;
+    private ListView entryListView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_fragment2, container, false);
+        entryListView = (ListView) view.findViewById(R.id.listview_frag2);
         fillData();
         return view;
     }
@@ -35,18 +33,22 @@ public class TabFragment2 extends Fragment implements LoaderManager.LoaderCallba
 
         // Fields from the database (projection)
         // Must include the _id column for the adapter to work
-        String[] from = new String[] { DiaryEntryTableUtil.COLUMN_TITLE};
+        String[] from = new String[] {DiaryEntryTableUtil.COLUMN_ID, DiaryEntryTableUtil.COLUMN_TITLE};
         // Fields on the UI to which we map
-        int[] to = new int[] {R.id.tv_fragment2};
+        int[] to = new int[] {R.id.tvDateCreated,R.id.tvDiaryTitle};
 
-        getLoaderManager().initLoader(0, null, this);
-        adapter = new SimpleCursorAdapter(this, R.layout.todo_row, null, from,
+        //adapter = new SimpleCursorAdapter(getContext(), R.layout.row_diary_entry, null, from,
+                //to, 0);
+
+        //entryListView.setAdapter(adapter);
+        getLoaderManager().initLoader(0, null,this);
+        adapter = new SimpleCursorAdapter(getContext(), R.layout.row_diary_entry, null, from,
                 to, 0);
 
-        setListAdapter(adapter);
+        entryListView.setAdapter(adapter);
     }
 
-
+    // creates a new loader after the initLoader () call
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = { DiaryEntryTableUtil.COLUMN_ID, DiaryEntryTableUtil.COLUMN_TITLE};
@@ -63,5 +65,6 @@ public class TabFragment2 extends Fragment implements LoaderManager.LoaderCallba
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         adapter.swapCursor(null);
-    }
+        }
+
 }

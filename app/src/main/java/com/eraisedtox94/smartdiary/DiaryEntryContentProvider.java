@@ -60,7 +60,7 @@ public class DiaryEntryContentProvider extends ContentProvider {
                 //there is nothing to do if the query is for the table
                 break;
             case ENTRIES:
-                queryBuilder.appendWhere(Constants.COLUMN_ID + " = " + uri.getLastPathSegment());
+                //queryBuilder.appendWhere(Constants.COLUMN_ID + " = " + 1);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
