@@ -14,13 +14,13 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/etTitle" />
+        android:id="@+id/et_title_diary" />
 
     <com.eraisedtox94.smartdiary.LinedEditText
-        android:id="@+id/edit_text_note"
+        android:id="@+id/et_content_diary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/etTitle"
+        android:layout_below="@+id/et_title_diary"
         android:capitalize="sentences"
         android:fadingEdge="vertical"
         android:gravity="top"
@@ -34,10 +34,8 @@
         android:text="SAVE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:id="@+id/btnSave"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

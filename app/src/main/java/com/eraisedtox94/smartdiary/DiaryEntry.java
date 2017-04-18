@@ -52,7 +52,7 @@ public class DiaryEntry {
         this.dataModified = dataModified;
     }
 
-
+    //TODO --use to be sorted out
     public static DiaryEntry getEntryfromCursor(Cursor cursor){
         DiaryEntry diaryEntry = new DiaryEntry();
         diaryEntry.setId(cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID)));

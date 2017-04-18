@@ -41,6 +41,7 @@ public class DiaryEntryContentProvider extends ContentProvider {
     }
 
 
+    //TODO DatabaseHelper .getInstance() would be preferable instead of using 'new'
     @Override
     public boolean onCreate() {
         dbHelper = new DatabaseHelper(getContext());
@@ -92,6 +93,8 @@ public class DiaryEntryContentProvider extends ContentProvider {
         return Uri.parse(BASE_PATH + "/" + id);
     }
 
+
+    //TODO not yet actually used
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int uriType = sURIMatcher.match(uri);
@@ -124,6 +127,7 @@ public class DiaryEntryContentProvider extends ContentProvider {
         return rowsDeleted;
     }
 
+    //TODO not yet actually used
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         int uriType = sURIMatcher.match(uri);
@@ -162,9 +166,9 @@ public class DiaryEntryContentProvider extends ContentProvider {
 
 
     private void checkColumns(String[] projection) {
-        String[] available = { DiaryEntryTableUtil.COLUMN_DATE_CREATED,
-                DiaryEntryTableUtil.COLUMN_CONTENTS, DiaryEntryTableUtil.COLUMN_TITLE,
-                DiaryEntryTableUtil.COLUMN_ID,DiaryEntryTableUtil.COLUMN_DATE_MODIFIED};
+        String[] available = { DiaryEntryTableUtil.COLUMN_ID, DiaryEntryTableUtil.COLUMN_TITLE,
+                 DiaryEntryTableUtil.COLUMN_CONTENTS, DiaryEntryTableUtil.COLUMN_DATE_CREATED,
+                DiaryEntryTableUtil.COLUMN_DATE_MODIFIED};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(
                     Arrays.asList(projection));

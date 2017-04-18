@@ -33,9 +33,9 @@ public class TabFragment2 extends Fragment implements LoaderManager.LoaderCallba
 
         // Fields from the database (projection)
         // Must include the _id column for the adapter to work
-        String[] from = new String[] {DiaryEntryTableUtil.COLUMN_ID, DiaryEntryTableUtil.COLUMN_TITLE};
+        String[] from = new String[] {DiaryEntryTableUtil.COLUMN_TITLE,DiaryEntryTableUtil.COLUMN_DATE_CREATED};
         // Fields on the UI to which we map
-        int[] to = new int[] {R.id.tvDateCreated,R.id.tvDiaryTitle};
+        int[] to = new int[] {R.id.tvDiaryTitle,R.id.tvDateCreated};
 
         //adapter = new SimpleCursorAdapter(getContext(), R.layout.row_diary_entry, null, from,
                 //to, 0);
@@ -51,7 +51,8 @@ public class TabFragment2 extends Fragment implements LoaderManager.LoaderCallba
     // creates a new loader after the initLoader () call
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String[] projection = { DiaryEntryTableUtil.COLUMN_ID, DiaryEntryTableUtil.COLUMN_TITLE};
+        //String[] projection = { DiaryEntryTableUtil.COLUMN_ID, DiaryEntryTableUtil.COLUMN_TITLE};
+        String[] projection = { DiaryEntryTableUtil.COLUMN_ID,DiaryEntryTableUtil.COLUMN_TITLE, DiaryEntryTableUtil.COLUMN_DATE_CREATED };
         CursorLoader cursorLoader = new CursorLoader(getContext(),
                 DiaryEntryContentProvider.CONTENT_URI, projection, null, null, null);
         return cursorLoader;

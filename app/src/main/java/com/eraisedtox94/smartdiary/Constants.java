@@ -6,7 +6,10 @@ package com.eraisedtox94.smartdiary;
 
 public class Constants {
 
-    public static final String DIARY_ENTRY_TABLE = "notes";
+    //dbhelper constants
+    public static final String DATABASE_NAME = "diary_entries.db";
+    public static final int DATABASE_VERSION = 1;
+
 
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "title";
