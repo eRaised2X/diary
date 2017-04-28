@@ -12,7 +12,7 @@ public class DiaryEntryTableUtil {
     public static final String TABLE_DIARY_ENTRIES = "diary_entry_table";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_CONTENTS = "contents";
+    //public static final String COLUMN_FILENAME = "contents";
     public static final String COLUMN_DATE_CREATED = "date_created";
     public static final String COLUMN_DATE_MODIFIED = "date_modified";
 
@@ -22,7 +22,7 @@ public class DiaryEntryTableUtil {
             + "("
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_TITLE + " text not null, "
-            + COLUMN_CONTENTS + " text not null,"
+            //+ COLUMN_FILENAME + " text not null,"
             + COLUMN_DATE_CREATED + " text not null,"
             + COLUMN_DATE_MODIFIED + " text not null"
             + ");";

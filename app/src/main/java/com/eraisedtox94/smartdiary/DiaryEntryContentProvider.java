@@ -167,7 +167,7 @@ public class DiaryEntryContentProvider extends ContentProvider {
 
     private void checkColumns(String[] projection) {
         String[] available = { DiaryEntryTableUtil.COLUMN_ID, DiaryEntryTableUtil.COLUMN_TITLE,
-                 DiaryEntryTableUtil.COLUMN_CONTENTS, DiaryEntryTableUtil.COLUMN_DATE_CREATED,
+                DiaryEntryTableUtil.COLUMN_DATE_CREATED,
                 DiaryEntryTableUtil.COLUMN_DATE_MODIFIED};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(

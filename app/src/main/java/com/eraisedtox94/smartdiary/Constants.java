@@ -1,5 +1,7 @@
 package com.eraisedtox94.smartdiary;
 
+import android.view.View;
+
 /**
  * Created by spraful on 4/8/2017.
  */
@@ -24,4 +26,13 @@ public class Constants {
             Constants.COLUMN_CREATED_TIME,
             Constants.COLUMN_MODIFIED_TIME
     };
+
+
+    //String for fonts path
+    public static String fontPathBradley = "fonts/bradley_hand.ttf";
+
+
+    //String for File Storage in external storage
+    public static String nameOfFolderContainingEntries = "DiaryFiles";
+
 }

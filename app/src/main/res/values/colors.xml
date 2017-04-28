@@ -3,4 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="colorShadowText">#8C8C8C</color>
+
+    <!--swipe tab related-->
+    <color name="colorTabIndicator">#CDCDCD</color>
+    <color name="colorTabSelected">#AdAdAd</color>
+    <color name="colorTabText">#a73670</color>
+    <color name="colorTabTextSelected">#FFFFFF</color>
+    <color name="colorTabTextUnSelected">#CDCDCD</color>
 </resources>

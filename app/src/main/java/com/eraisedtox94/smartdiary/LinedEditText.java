@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 public class LinedEditText extends EditText{
 
+
     private Rect rect;
     private Paint paint;
 
@@ -24,8 +25,8 @@ public class LinedEditText extends EditText{
 
         rect = new Rect();
         paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.parseColor("#e5e500"));
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.parseColor("#CCC999"));
     }
 
     public void setLineColor(int color) {

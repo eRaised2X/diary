@@ -2,6 +2,7 @@ package com.eraisedtox94.smartdiary;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class TabFragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_fragment3, container, false);
         //btn = (Button)view.findViewById(R.id.button1);
-
+        Log.d("3rd frag ","oncreate3");
         return view;
     }
 }

@@ -18,8 +18,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_screen);
-        tempThread = new Thread(new Runnable() {
+        //setContentView(R.layout.splash_screen);
+        /*tempThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
@@ -29,7 +29,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 }
             }
         });
-        tempThread.start();
+        tempThread.start();*/
 
         Intent intentToStartMainActivity = new Intent(SplashScreenActivity.this,MainActivity.class);
         finish();

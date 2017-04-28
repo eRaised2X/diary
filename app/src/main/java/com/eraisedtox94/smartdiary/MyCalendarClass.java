@@ -12,7 +12,7 @@ public class MyCalendarClass {
 
     private static MyCalendarClass myCalendarClass = new MyCalendarClass();
 
-    Calendar mCalendar = Calendar.getInstance();
+    //Calendar mCalendar = Calendar.getInstance();
     SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");;
 
 
@@ -26,12 +26,12 @@ public class MyCalendarClass {
     }
 
     public String getFormattedDate(){
-        return  mSimpleDateFormat.format(mCalendar.getTime());
+        return  mSimpleDateFormat.format(Calendar.getInstance().getTime());
     }
 
     public String getFormattedTime(){
-        SimpleDateFormat df = new SimpleDateFormat("HH:mm a");
-        String  currentTime = df.format(mCalendar.getTime());
+        SimpleDateFormat df = new SimpleDateFormat("hh:mm a");
+        String  currentTime = df.format(Calendar.getInstance().getTime());
         return  currentTime;
     }
 }

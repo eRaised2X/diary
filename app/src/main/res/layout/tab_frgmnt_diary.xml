@@ -25,10 +25,25 @@
         android:fadingEdge="vertical"
         android:gravity="top"
         android:hint="enter_content"
-        android:inputType="textMultiLine"
+        android:inputType="textMultiLine|textNoSuggestions"
         android:padding="@dimen/margin_padding_small"
         android:scrollbars="vertical"
-        android:textSize="@dimen/text_size_normal"/>
+        android:textSize="@dimen/text_size_normal"
+        android:typeface="sans"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:shadowColor="@color/colorShadowText"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        />
+
+    <ProgressBar
+        android:id="@+id/pbarDiaryMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
     <Button
         android:text="SAVE"
@@ -36,6 +51,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnSave"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:text="NEW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnNew"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+
 
 </RelativeLayout>

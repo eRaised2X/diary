@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/tabfragment3xml">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_fragment3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -16,10 +17,8 @@
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="253dp"
-        android:id="@+id/button2" />
+        android:id="@+id/button2"
+        android:layout_above="@+id/tv_fragment3"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
