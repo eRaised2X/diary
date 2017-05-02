@@ -13,7 +13,7 @@ import android.util.Log;
 /**
  * Created by spraful on 4/5/2017.
  */
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class PagerAdapter extends FragmentStatePagerAdapter{
     int mNumOfTabs;
     private Context context;
 
@@ -24,7 +24,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
 
     //TODO hardcoded `number of tabs` = 3
-    public static Fragment tabFragments[] = new Fragment[3];
+    public Fragment tabFragments[] = new Fragment[3];
 
 
     @Override
@@ -58,6 +58,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         return mNumOfTabs;
     }
 
+
     @Override
     public CharSequence getPageTitle(int position) {
         //TODO to be looked in depth
@@ -65,7 +66,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             Log.d("you are culprit","null context");
         }
         int imageResId[] = {R.drawable.icon_pencil,R.drawable.icon_list,R.drawable.icon_settings};
-        String tabTitles[] = {"Write","List","Settings"};
+        String tabTitles[] = {"WRITE","LIST","SETTINGS"};
         // Generate title based on item position
 
         Drawable image = context.getResources().getDrawable(imageResId[position]);

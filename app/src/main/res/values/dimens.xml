@@ -44,4 +44,12 @@
     <dimen name="dimen_tab_text_size">14sp</dimen>
 
 
+    <!--custom layout dimens-->
+    <dimen name="dimen_layout_title_height">40dp</dimen>
+    <dimen name="dimen_custom_layout_padding">10dp</dimen>
+    <dimen name="dimen_custom_layout_rect_radius">5dp</dimen>
+
+    <!--fab button-->
+    <dimen name="dimen_fab_margin">40dp</dimen>
+
 </resources>

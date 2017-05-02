@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#8e24aa</color>
+    <!--#3F51B5
+    #005A66
+    -->
+
+    <color name="colorPrimaryDark">#1A237E</color>
+    <!--#303F9F
+    #00444D
+    -->
+    <color name="colorAccent">#e1bee7</color>
+    <!--
+    #00A695
+    -->
 
     <color name="colorShadowText">#8C8C8C</color>
 
     <!--swipe tab related-->
-    <color name="colorTabIndicator">#CDCDCD</color>
-    <color name="colorTabSelected">#AdAdAd</color>
-    <color name="colorTabText">#a73670</color>
+    <color name="colorTabIndicator">#FFF</color>
+    <color name="colorTabSelected">#FFF</color>
+    <color name="colorTabText">#E0F2F1</color>
     <color name="colorTabTextSelected">#FFFFFF</color>
-    <color name="colorTabTextUnSelected">#CDCDCD</color>
+    <color name="colorTabTextUnSelected">#E0F2F1</color>
+
+    <!--color scheme related to diary main xml layout-->
+    <color name="colorCustomLayoutBackground">#fff</color>
+    <color name="colorDiaryMainLayoutBackground">#C5CAE9</color>
+    <!--#7e57c2
+    5C6BC0
+    E8EAF6
+
+    -->
+
+
+    <!--basic color by names-->
+    <color name="colorMyWhite">#fff</color>
+
+    <!--color scheme for FAB button-->
+    <color name="colorFABNew">#1A237E</color>
+    <color name="colorFABNewOnClick">#7986CB</color>
+
 </resources>
