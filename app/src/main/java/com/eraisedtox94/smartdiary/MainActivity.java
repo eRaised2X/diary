@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,8 +23,12 @@ public class MainActivity extends AppCompatActivity implements IOnListItemClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Lorem ipsum");
+        toolbar.setLogo(R.drawable.icon_diary);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorMyWhite));
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
@@ -86,17 +91,6 @@ public class MainActivity extends AppCompatActivity implements IOnListItemClickL
 
         return super.onOptionsItemSelected(item);
     }
-
-    /*public void handleListItemClicked(String filename){
-
-        FragmentDiaryMain fragmentDiaryMain = (FragmentDiaryMain) PagerAdapter.tabFragments[0];
-        if(fragmentDiaryMain == null){
-            Log.d("getting fragment null","null...");
-            return;
-        }
-        Log.d("fragment is not null","at least");
-        fragmentDiaryMain.readFromFileInExternalStorage(filename);
-    }*/
 
     public FragmentDiaryMain getInstanceOfFragmentDairyMain(){
 

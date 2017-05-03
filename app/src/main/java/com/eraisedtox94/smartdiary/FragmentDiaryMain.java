@@ -1,11 +1,14 @@
 package com.eraisedtox94.smartdiary;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,7 +32,7 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
 
     MyUtilityClass myUtilityClass = new MyUtilityClass();
     private Button btnSaveEntry;
-    private Button btnNewEntry;
+    private FloatingActionButton floatingActionButtonForNewFile;
 
     private View tabview;
 
@@ -41,6 +44,9 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
     private Typeface typefaceforContentEditText;
 
     ProgressBar progressBar;
+    private String FILE_ID = "idOfFileInContext";
+
+    MySharedPreferences mySharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,10 +59,15 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
         return tabview;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d("view created","called");
+    }
+
     public void writeToExternalFile(String file_name){
 
     }
-
 
 
     //method definition to check for file existence
@@ -78,11 +89,16 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
         etTitle = (EditText) tabview.findViewById(R.id.et_title_diary);
         etContent  = (EditText) tabview.findViewById(R.id.et_content_diary);
         btnSaveEntry = (Button)tabview.findViewById(R.id.btnSave);
-        btnNewEntry = (Button)tabview.findViewById(R.id.btnNew);
         btnSaveEntry.setVisibility(View.INVISIBLE);
+
+        floatingActionButtonForNewFile = (FloatingActionButton) tabview.findViewById(R.id.fabButtonNew);
+        floatingActionButtonForNewFile.setRippleColor(getResources().getColor(R.color.colorFABNewOnClick));
 
         progressBar = (ProgressBar)tabview.findViewById(R.id.pbarDiaryMain);
         progressBar.setVisibility(View.INVISIBLE);
+
+        mySharedPreferences = new MySharedPreferences();
+        readFromFileInExternalStorage(mySharedPreferences.getItemInContextFromSharedPref(getContext(),FILE_ID));
 
         //TODO refactoring required
         etContent.addTextChangedListener(new TextWatcher() {
@@ -112,13 +128,14 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
 
     public void setListeners(){
         btnSaveEntry.setOnClickListener(this);
-        btnNewEntry.setOnClickListener(this);
+        floatingActionButtonForNewFile.setOnClickListener(this);
     }
 
 
     public void clearPage(){
         etTitle.setText("");
         etContent.setText("");
+        mySharedPreferences.setItemInContextInSharedPref(getContext(),FILE_ID,null);
     }
 
 
@@ -167,29 +184,44 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
 
 
     public int readFromFileInExternalStorage(String filenameToBeReadFrom){
-       AsynTaskToReadFromExternalDirectory asynTaskToReadFromExternalDirectory = new AsynTaskToReadFromExternalDirectory(filenameToBeReadFrom);
+        if(filenameToBeReadFrom==null){
+            return 0;
+        }
+
+        AsyncTaskToReadFromExternalDirectory asynTaskToReadFromExternalDirectory = new AsyncTaskToReadFromExternalDirectory(filenameToBeReadFrom);
         asynTaskToReadFromExternalDirectory.execute();
+
+        mySharedPreferences.setItemInContextInSharedPref(getContext(),FILE_ID,filenameToBeReadFrom);
         return 0;
     }
 
 
     public void handleSaveOfDiaryEntry(){
+    //TODO handle file exceptions , scenarios of being unable to saved/written to external
 
         String titleString = etTitle.getText().toString();
         String content = etContent.getText().toString();
         String dateCreatedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
-        String dateModifiedString = "1/9/99";
+        String dateModifiedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
 
-        ContentValues values = new ContentValues();
-        //values.put(DiaryEntryTableUtil.COLUMN_ID, id);
-        values.put(DiaryEntryTableUtil.COLUMN_TITLE, titleString);
-        //values.put(DiaryEntryTableUtil.COLUMN_FILENAME, "1");
-        values.put(DiaryEntryTableUtil.COLUMN_DATE_CREATED, dateCreatedString);
-        values.put(DiaryEntryTableUtil.COLUMN_DATE_MODIFIED, dateModifiedString);
+        Uri uri=null;
+        //TODO getContext() can be removed and initialise context once and use it again n again
+        String id = mySharedPreferences.getItemInContextFromSharedPref(getContext(),FILE_ID);
+        if(id==null){
+            ContentValues values = new ContentValues();
+            //values.put(DiaryEntryTableUtil.COLUMN_ID, id);
+            values.put(DiaryEntryTableUtil.COLUMN_TITLE, titleString);
+            //values.put(DiaryEntryTableUtil.COLUMN_FILENAME, "1");
+            values.put(DiaryEntryTableUtil.COLUMN_DATE_CREATED, dateCreatedString);
+            values.put(DiaryEntryTableUtil.COLUMN_DATE_MODIFIED, dateModifiedString);
 
-        Uri uri = getContext().getContentResolver().insert(
-                                    DiaryEntryContentProvider.CONTENT_URI, values);
-        writeIntoFileInExternalStorage(uri.getLastPathSegment(), content);
+            uri = getContext().getContentResolver().insert(
+                    DiaryEntryContentProvider.CONTENT_URI, values);
+
+            mySharedPreferences.setItemInContextInSharedPref(getContext(),FILE_ID,uri.getLastPathSegment());
+        }
+
+        writeIntoFileInExternalStorage(mySharedPreferences.getItemInContextFromSharedPref(getContext(),FILE_ID), content);
 
         Toast.makeText(getContext(),"FILE SAVED",Toast.LENGTH_SHORT).show();
     }
@@ -199,10 +231,10 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
         switch(view.getId()){
             case R.id.btnSave:
                 handleSaveOfDiaryEntry();
-                updateDiaryEntryOnStorage();
+                //updateDiaryEntryOnStorage();
                 btnSaveEntry.setVisibility(View.INVISIBLE);
                 break;
-            case R.id.btnNew:
+            case R.id.fabButtonNew:
                 clearPage();
                 break;
             default:
@@ -217,12 +249,12 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
 
 
 
-    public class AsynTaskToReadFromExternalDirectory extends AsyncTask<String, Integer, String> {
+    public class AsyncTaskToReadFromExternalDirectory extends AsyncTask<String, Integer, String> {
 
 
         private String filenameToBeReadFrom;
 
-        public AsynTaskToReadFromExternalDirectory(String filenameToBeReadFrom) {
+        public AsyncTaskToReadFromExternalDirectory(String filenameToBeReadFrom) {
             this.filenameToBeReadFrom = filenameToBeReadFrom;
         }
 
@@ -302,4 +334,28 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
 
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("frgm diary main", "on detach");
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("frgm diary main", "on view destroy");
+    }
+
+    @Override
+    public void onAttachFragment(Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+        Log.d("frgm diary main", "on attach");
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.d("frgm diary main", "on attach cntx");
+    }
 }

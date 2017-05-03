@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="content_hint">How was the day today?</string>
+    <string name="title_hint">Enter your mood message</string>
+
 </resources>
