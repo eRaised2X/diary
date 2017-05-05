@@ -65,7 +65,8 @@
             android:shadowRadius="2"
             android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/text_size_normal"
-            android:typeface="sans" />
+            android:typeface="sans"
+            android:background="@android:color/transparent"/>
 
     </LinearLayout>
 

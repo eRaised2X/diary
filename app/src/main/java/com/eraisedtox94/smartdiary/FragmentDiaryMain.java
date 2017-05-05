@@ -8,8 +8,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -50,7 +53,7 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tabview = inflater.inflate(R.layout.tab_frgmnt_diary, container, false);
+        tabview = inflater.inflate(R.layout.tab_frag_diary2, container, false);
         Log.d("life cycle FragMain","onCreate called");
         initialise();
         setListeners();
@@ -92,7 +95,7 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
         btnSaveEntry.setVisibility(View.INVISIBLE);
 
         floatingActionButtonForNewFile = (FloatingActionButton) tabview.findViewById(R.id.fabButtonNew);
-        floatingActionButtonForNewFile.setRippleColor(getResources().getColor(R.color.colorFABNewOnClick));
+        floatingActionButtonForNewFile.setRippleColor(ContextCompat.getColor(getActivity(),R.color.colorFABNewOnClick));
 
         progressBar = (ProgressBar)tabview.findViewById(R.id.pbarDiaryMain);
         progressBar.setVisibility(View.INVISIBLE);
@@ -223,7 +226,9 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
 
         writeIntoFileInExternalStorage(mySharedPreferences.getItemInContextFromSharedPref(getContext(),FILE_ID), content);
 
+
         Toast.makeText(getContext(),"FILE SAVED",Toast.LENGTH_SHORT).show();
+        //Snackbar.make(, "Welcome to SwA", Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -312,7 +317,7 @@ public class FragmentDiaryMain extends Fragment implements View.OnClickListener{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressBar.setVisibility(View.INVISIBLE);
-            Log.d("check post execute=", s);
+            Log.d("check post execute=", "here is string="+s);
             etContent.setText(s);
 
         }

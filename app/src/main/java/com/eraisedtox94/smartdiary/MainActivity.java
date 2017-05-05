@@ -1,6 +1,8 @@
 package com.eraisedtox94.smartdiary;
 
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,12 +24,13 @@ public class MainActivity extends AppCompatActivity implements IOnListItemClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.new_main3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Lorem ipsum");
         toolbar.setLogo(R.drawable.icon_diary);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorMyWhite));
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.colorMyWhite));
+        toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.colorMyWhite));
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
