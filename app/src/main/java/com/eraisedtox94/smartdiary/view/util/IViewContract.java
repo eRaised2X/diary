@@ -15,6 +15,7 @@ public interface IViewContract {
         void notifyChange();
         void setTheAdapter(Cursor data);
         void deleteListItems(String []ids);
+        void switchToTab(int index);
     }
 
     interface ICreateNewEntryView {

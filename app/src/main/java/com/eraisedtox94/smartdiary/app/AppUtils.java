@@ -22,4 +22,7 @@ public class AppUtils {
     //flags for indicating whether it is a read operation or a write operation
     public static String READ_FLAG = "0";
     public static String WRITE_FLAG = "1";
+
+    //flag to act as delimiter to indicate what part is title and what is content inside file read
+    public static String TITLE_CONTENT_SEPARATOR_FLAG = "!~^$^~!";
 }

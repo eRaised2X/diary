@@ -58,7 +58,8 @@ public class FragmentListOfEntries extends Fragment implements IViewContract.ILi
         return view;
     }
 
-    //TODO this can be shifted to MainActivity so as to reduce instantiation of View Pager probably
+    //TODO this stub can be improved ,shifted or modelled well.. probably
+    @Override
     public void switchToTab(int index){
         ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.pager);
         viewPager.setCurrentItem(index);

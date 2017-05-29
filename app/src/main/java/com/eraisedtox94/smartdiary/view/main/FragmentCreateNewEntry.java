@@ -94,6 +94,7 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
 
         presenter.readFile(appPrefsManager.getLastOpenedFileIdFromSharedPref());
 
+
     }
 
 
@@ -122,10 +123,19 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
 
     @Override
     public void setContentReadFromFile(String content){
-        if(etContent==null){
-            Log.d("etcontent null","FragCreateNewEntry");
+        //TODO prone to crashes
+        String title= "";
+        String matter ="";
+        if(content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG)!=-1){
+            title = content.substring(0,content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG));
+            matter = content.substring(content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG)+
+                    AppUtils.TITLE_CONTENT_SEPARATOR_FLAG.length(),content.length());
         }
-        etContent.setText(content);
+        if(etContent == null || etTitle == null){
+            Log.d("etContent or etTitle"," is null ,FragCreateNewEntry");
+        }
+        etContent.setText(matter);
+        etTitle.setText(title);
     }
 
 
@@ -141,16 +151,18 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
     public void handleClickOfSave() {
         //TODO file exceptions need to be handled, like scenarios of being unable to saved/written to external
 
-        String titleString = etTitle.getText().toString();
+        String textTitle = etTitle.getText().toString();
         String textContent = etContent.getText().toString();
+        textContent = textTitle + AppUtils.TITLE_CONTENT_SEPARATOR_FLAG + textContent;
         String dateCreatedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
+        //todo modified thing to be handled
         String dateModifiedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
 
         Uri uri = null;
         String id = appPrefsManager.getLastOpenedFileIdFromSharedPref();
         if (id.equals(AppUtils.DEFAULT_FILE_ID)) {
             ContentValues values = new ContentValues();
-            values.put(DiaryEntryTableUtil.COLUMN_TITLE, titleString);
+            values.put(DiaryEntryTableUtil.COLUMN_TITLE, textTitle);
             values.put(DiaryEntryTableUtil.COLUMN_DATE_CREATED, dateCreatedString);
             values.put(DiaryEntryTableUtil.COLUMN_DATE_MODIFIED, dateModifiedString);
 
