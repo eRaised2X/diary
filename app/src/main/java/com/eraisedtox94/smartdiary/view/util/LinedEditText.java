@@ -1,4 +1,4 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.view.util;
 
 import android.content.Context;
 import android.graphics.Canvas;

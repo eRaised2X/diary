@@ -1,10 +1,4 @@
-package com.eraisedtox94.smartdiary;
-
-import android.database.Cursor;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+package com.eraisedtox94.smartdiary.model;
 
 /**
  * Created by spraful on 4/6/2017.
@@ -52,16 +46,15 @@ public class DiaryEntry {
         this.dataModified = dataModified;
     }
 
-    //TODO --use to be sorted out
+    /*
+    //TODO --to be used definitely
     public static DiaryEntry getEntryfromCursor(Cursor cursor){
         DiaryEntry diaryEntry = new DiaryEntry();
-        diaryEntry.setId(cursor.getLong(cursor.getColumnIndex(Constants.COLUMN_ID)));
-        diaryEntry.setTitle(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_TITLE)));
-        diaryEntry.setContent(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CONTENT)));
-        diaryEntry.setDateCreated(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CREATED_TIME)));
-        diaryEntry.setDataModified(cursor.getString(cursor.getColumnIndex(Constants.COLUMN_CREATED_TIME)));
+        diaryEntry.setId(cursor.getLong(cursor.getColumnIndex(DiaryEntryTableUtil.COLUMN_ID)));
+        diaryEntry.setTitle(cursor.getString(cursor.getColumnIndex(DiaryEntryTableUtil.COLUMN_TITLE)));
+        diaryEntry.setDateCreated(cursor.getString(cursor.getColumnIndex(DiaryEntryTableUtil.COLUMN_DATE_CREATED)));
+        diaryEntry.setDataModified(cursor.getString(cursor.getColumnIndex(DiaryEntryTableUtil.COLUMN_DATE_MODIFIED)));
         return diaryEntry;
-    }
-
+    }*/
 
 }

@@ -1,4 +1,4 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.presenter.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,21 +10,26 @@ import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.util.Log;
 
+import com.eraisedtox94.smartdiary.R;
+import com.eraisedtox94.smartdiary.view.main.TabFragment3;
+import com.eraisedtox94.smartdiary.view.main.FragmentListOfEntries;
+import com.eraisedtox94.smartdiary.view.main.FragmentCreateNewEntry;
+
 /**
  * Created by spraful on 4/5/2017.
  */
-public class PagerAdapter extends FragmentStatePagerAdapter{
-    int mNumOfTabs;
+public class MyPagerAdapter extends FragmentStatePagerAdapter{
+    private int mNumOfTabs;
     private Context context;
 
-    public PagerAdapter(FragmentManager fm, int NumOfTabs,Context mainContext) {
+    public MyPagerAdapter(FragmentManager fm, int NumOfTabs, Context mainContext) {
         super(fm);
         context = mainContext;
         this.mNumOfTabs = NumOfTabs;
     }
 
     //TODO hardcoded `number of tabs` = 3
-    public Fragment tabFragments[] = new Fragment[3];
+    private static Fragment tabFragments[] = new Fragment[3];
 
 
     @Override
@@ -37,11 +42,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter{
 
         switch (position) {
             case 0:
-                FragmentDiaryMain tab1 = new FragmentDiaryMain();
+                FragmentCreateNewEntry tab1 = new FragmentCreateNewEntry();
                 tabFragments[0]=tab1;
                 return tab1;
             case 1:
-                FragmentAllEntries tab2 = new FragmentAllEntries();
+                FragmentListOfEntries tab2 = new FragmentListOfEntries();
                 tabFragments[1]=tab2;
                 return tab2;
             case 2:

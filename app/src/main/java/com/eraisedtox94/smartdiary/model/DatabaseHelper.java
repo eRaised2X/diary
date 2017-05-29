@@ -1,8 +1,10 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
 
 /**
  * Created by spraful on 4/8/2017.
@@ -10,9 +12,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-
     public DatabaseHelper(Context context) {
-        super(context, Constants.DATABASE_NAME, null, Constants.DATABASE_VERSION);
+        super(context, DiaryEntryTableUtil.DATABASE_NAME, null, DiaryEntryTableUtil.DATABASE_VERSION);
 
     }
 
