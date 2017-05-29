@@ -1,4 +1,4 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.model;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -8,11 +8,13 @@ import android.util.Log;
  */
 
 public class DiaryEntryTableUtil {
+
     // Database table
+    public static final String DATABASE_NAME = "diary_entries.db";
+    public static final int DATABASE_VERSION = 1;
     public static final String TABLE_DIARY_ENTRIES = "diary_entry_table";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "title";
-    //public static final String COLUMN_FILENAME = "contents";
     public static final String COLUMN_DATE_CREATED = "date_created";
     public static final String COLUMN_DATE_MODIFIED = "date_modified";
 
@@ -22,7 +24,6 @@ public class DiaryEntryTableUtil {
             + "("
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_TITLE + " text not null, "
-            //+ COLUMN_FILENAME + " text not null,"
             + COLUMN_DATE_CREATED + " text not null,"
             + COLUMN_DATE_MODIFIED + " text not null"
             + ");";

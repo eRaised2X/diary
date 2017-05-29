@@ -1,35 +1,28 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.view.main;
 
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.List;
+import com.eraisedtox94.smartdiary.presenter.adapters.PagerAdapter;
+import com.eraisedtox94.smartdiary.R;
 
-public class MainActivity extends AppCompatActivity implements IOnListItemClickListener{
-
-    //RecyclerView recyclerView;
-    PagerAdapter adapter;
-
-    List<android.support.v4.app.Fragment> listOfAllFragments;
-    FragmentDiaryMain fragmentDiaryMain;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_main3);
+        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Lorem ipsum");
+
+        toolbar.setTitle("Lorem ipsum");//TODO this did not work
         toolbar.setLogo(R.drawable.icon_diary);
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.colorMyWhite));
         toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.colorMyWhite));
 
 
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements IOnListItemClickL
         tabLayout.addTab(tab3);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        adapter = new PagerAdapter
+        final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount(),this);
 
 
@@ -58,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements IOnListItemClickL
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         //Hack to prevent loading of frag on each swipe
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(5);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -76,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements IOnListItemClickL
 
             }
         });
-
     }
 
     @Override
@@ -93,31 +85,6 @@ public class MainActivity extends AppCompatActivity implements IOnListItemClickL
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public FragmentDiaryMain getInstanceOfFragmentDairyMain(){
-
-        listOfAllFragments = getSupportFragmentManager().getFragments();
-        if(listOfAllFragments == null){
-            Log.d("list if fragments","is null");
-            return null;
-        }
-        else {
-            Log.d("list if fragments", "woaa!! not null");
-            fragmentDiaryMain = (FragmentDiaryMain) listOfAllFragments.get(0);
-        }
-        return fragmentDiaryMain;
-    }
-
-
-    @Override
-    public void listItemClickedListener(String filename) {
-        Log.d("this is awesome","communication success");
-        if(fragmentDiaryMain == null){
-            Log.d("getting fragment main","null...");
-            fragmentDiaryMain = getInstanceOfFragmentDairyMain();
-        }
-        fragmentDiaryMain.readFromFileInExternalStorage(filename);
     }
 
 }

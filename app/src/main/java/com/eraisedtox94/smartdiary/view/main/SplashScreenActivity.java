@@ -1,10 +1,9 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.view.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import static java.lang.Thread.sleep;
 

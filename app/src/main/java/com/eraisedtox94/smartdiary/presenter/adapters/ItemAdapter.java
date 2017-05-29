@@ -1,14 +1,14 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.presenter.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.eraisedtox94.smartdiary.R;
+
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by spraful on 03-May-17.

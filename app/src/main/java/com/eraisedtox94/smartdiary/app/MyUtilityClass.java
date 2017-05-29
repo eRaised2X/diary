@@ -1,4 +1,4 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.app;
 
 import android.util.Log;
 
@@ -8,13 +8,15 @@ import android.util.Log;
 
 public class MyUtilityClass {
 
-    private int fileNameGeneratorInt = 0;
-    public void WriteLog(Class className ,String str){
-        Log.d(className.getName(),str);
-    }
+    //private int fileNameGeneratorInt = 0;
 
+    /*
     public String FileNameForNextFileBeingCreated(){
         fileNameGeneratorInt++;
         return fileNameGeneratorInt+".txt";
+    }*/
+
+    public void WriteLog(Class className ,String log_string){
+        Log.d(className.getName(), log_string);
     }
 }

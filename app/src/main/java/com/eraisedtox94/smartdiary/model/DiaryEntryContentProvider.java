@@ -1,14 +1,17 @@
-package com.eraisedtox94.smartdiary;
+package com.eraisedtox94.smartdiary.model;
 
 import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
+
+import com.eraisedtox94.smartdiary.model.DatabaseHelper;
+import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -19,6 +22,7 @@ import java.util.HashSet;
 
 public class DiaryEntryContentProvider extends ContentProvider {
 
+    private Context mContext;
     private DatabaseHelper dbHelper;
     private static final int ENTRY = 100;
     private static final int ENTRIES = 101;
@@ -27,30 +31,35 @@ public class DiaryEntryContentProvider extends ContentProvider {
     private static final String BASE_PATH = "entries";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
 
-
+    /*
     public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
             + "/entries";
     public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
             + "/entry";
+    */
 
     private static final UriMatcher sURIMatcher = new UriMatcher(
             UriMatcher.NO_MATCH);
+
     static {
         sURIMatcher.addURI(AUTHORITY, BASE_PATH, ENTRIES);
         sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", ENTRY);
     }
 
 
-    //TODO DatabaseHelper .getInstance() would be preferable instead of using 'new'
     @Override
     public boolean onCreate() {
-        dbHelper = new DatabaseHelper(getContext());
+        mContext = getContext();
+        if(dbHelper == null){
+            dbHelper = new DatabaseHelper(mContext);
+        }
         return false;
     }
 
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         checkColumns(projection);
         queryBuilder.setTables(DiaryEntryTableUtil.TABLE_DIARY_ENTRIES);
@@ -68,7 +77,9 @@ public class DiaryEntryContentProvider extends ContentProvider {
         }
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
-        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        if (getContext() != null) {
+            cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        }
         return cursor;
     }
 
@@ -89,12 +100,13 @@ public class DiaryEntryContentProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (getContext() != null) {
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return Uri.parse(BASE_PATH + "/" + id);
     }
 
 
-    //TODO not yet actually used
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int uriType = sURIMatcher.match(uri);
@@ -102,11 +114,11 @@ public class DiaryEntryContentProvider extends ContentProvider {
         int rowsDeleted = 0;
         switch (uriType) {
             case ENTRIES:
-                rowsDeleted = sqlDB.delete(DiaryEntryTableUtil.TABLE_DIARY_ENTRIES, selection,
-                        selectionArgs);
+                sqlDB.delete(DiaryEntryTableUtil.TABLE_DIARY_ENTRIES, selection +" IN (" + new String(new char[selectionArgs.length-1]).replace("\0", "?,") + "?)", selectionArgs);
+                sqlDB.close();
                 break;
             case ENTRY:
-                String id = uri.getLastPathSegment();
+                /*String id = uri.getLastPathSegment();
                 if (TextUtils.isEmpty(selection)) {
                     rowsDeleted = sqlDB.delete(
                             DiaryEntryTableUtil.TABLE_DIARY_ENTRIES,
@@ -119,18 +131,21 @@ public class DiaryEntryContentProvider extends ContentProvider {
                                     + " and " + selection,
                             selectionArgs);
                 }
+                */
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
-        getContext().getContentResolver().notifyChange(uri, null);
+        if(getContext()!=null){
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
         return rowsDeleted;
     }
 
-    //TODO not yet actually used
+    //TODO update() method not yet actually used
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        int uriType = sURIMatcher.match(uri);
+        /*int uriType = sURIMatcher.match(uri);
         SQLiteDatabase sqlDB = dbHelper.getWritableDatabase();
         int rowsUpdated = 0;
         switch (uriType) {
@@ -161,6 +176,8 @@ public class DiaryEntryContentProvider extends ContentProvider {
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsUpdated;
+        */
+        return 0;
     }
 
 
@@ -181,4 +198,6 @@ public class DiaryEntryContentProvider extends ContentProvider {
             }
         }
     }
+
+
 }
