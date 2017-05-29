@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.eraisedtox94.smartdiary.presenter.adapters.PagerAdapter;
+import com.eraisedtox94.smartdiary.presenter.adapters.MyPagerAdapter;
 import com.eraisedtox94.smartdiary.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tab3);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter
+        final MyPagerAdapter adapter = new MyPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount(),this);
 
 

@@ -8,10 +8,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.text.TextUtils;
-
-import com.eraisedtox94.smartdiary.model.DatabaseHelper;
-import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -70,7 +66,7 @@ public class DiaryEntryContentProvider extends ContentProvider {
                 //there is nothing to do if the query is for the table
                 break;
             case ENTRIES:
-                //queryBuilder.appendWhere(Constants.COLUMN_ID + " = " + 1);
+                //queryBuilder.appendWhere(AppConstants.COLUMN_ID + " = " + 1);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);

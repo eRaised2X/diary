@@ -1,6 +1,6 @@
 package com.eraisedtox94.smartdiary.presenter.util;
 
-import com.eraisedtox94.smartdiary.model.IAppPrefsManagerImpl;
+import com.eraisedtox94.smartdiary.model.AppPrefsManagerImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -11,7 +11,7 @@ import java.util.Calendar;
 
 public class MyCalendarClass {
 
-    private IAppPrefsManagerImpl appSharedPreferences;
+    private AppPrefsManagerImpl appSharedPreferences;
 
     private static MyCalendarClass myCalendarClass ;
     private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy");
@@ -29,7 +29,7 @@ public class MyCalendarClass {
     /*
     public int getLanguagePreference(){
         if(appSharedPreferences == null)
-        appSharedPreferences = new IAppPrefsManagerImpl();
+        appSharedPreferences = new AppPrefsManagerImpl();
         appSharedPreferences.loadUserPreference("lang");
         return 0;
     }*/

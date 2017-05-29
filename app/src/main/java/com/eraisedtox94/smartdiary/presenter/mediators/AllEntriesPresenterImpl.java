@@ -7,13 +7,14 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 
-import com.eraisedtox94.smartdiary.app.AppUtils;
 import com.eraisedtox94.smartdiary.model.DiaryEntryContentProvider;
 import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
-import com.eraisedtox94.smartdiary.presenter.util.IAppPrefsManager;
-import com.eraisedtox94.smartdiary.presenter.util.IPresenterContract;
+import com.eraisedtox94.smartdiary.model.EventPassMsgToOtherPresenter;
 import com.eraisedtox94.smartdiary.presenter.util.ReadWriteFileAsyncTask;
+import com.eraisedtox94.smartdiary.view.main.FragmentListOfEntries;
 import com.eraisedtox94.smartdiary.view.util.IViewContract;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by spraful on 18-May-17.
@@ -24,17 +25,22 @@ public class AllEntriesPresenterImpl implements IPresenterContract.IAllEntriesPr
 
     IViewContract.IListAllEntriesView view;
     LoaderManager loaderManager;
+    IAppPrefsManager appPrefsManager;
 
     ReadWriteFileAsyncTask readWriteFileAsyncTask ;
 
-    //todo this constructor breaks the purpose of enforcing developer to pass parameters
-    public AllEntriesPresenterImpl(){
-
-    }
-
-    public AllEntriesPresenterImpl(LoaderManager loaderManager,IAppPrefsManager IAppPrefsManager){
+    public AllEntriesPresenterImpl(LoaderManager loaderManager,IAppPrefsManager appPrefsManager){
         this.loaderManager = loaderManager;
+        this.appPrefsManager = appPrefsManager;
     }
+
+
+
+    @Override
+    public void setView(IViewContract.IListAllEntriesView view) {
+        this.view = view;
+    }
+
 
     @Override
     public void fillViewWithListOfEntries() {
@@ -44,24 +50,26 @@ public class AllEntriesPresenterImpl implements IPresenterContract.IAllEntriesPr
     }
 
     @Override
-    public void attachView(IViewContract.IListAllEntriesView view) {
-        this.view = view;
-    }
+    public void listItemClickListener(String fileName) {
+        Log.d("event bus","coming into play");
 
+        EventPassMsgToOtherPresenter event = new EventPassMsgToOtherPresenter();
+        event.setFileName(fileName);
+        EventBus.getDefault().post(event);
+    }
 
 
     @Override
-    public void listItemClickListener(String fileName) {
-        Log.d("event bus","can come into play");
-        //todo you are creating a new instance on each click ..which is bad like hell
-        readWriteFileAsyncTask = new ReadWriteFileAsyncTask();
-        readWriteFileAsyncTask.execute(fileName, AppUtils.READ_FLAG);
+    public void asyncTaskDoneCallback(String s){
+        //Todo
     }
-
     @Override
     public void listItemLongClickListener(String[] fileNames) {
-        Log.d("event bus","should be here");
-        //view.deleteListItems(fileNames);
+        Log.d("event bus","might be used here");
+        if(view == null){
+            view = FragmentListOfEntries.newInstance();
+        }
+        view.deleteListItems(fileNames);
     }
 
 

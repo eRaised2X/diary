@@ -6,10 +6,9 @@ import android.util.Log;
 
 import com.eraisedtox94.smartdiary.app.AppConstants;
 import com.eraisedtox94.smartdiary.app.AppUtils;
-import com.eraisedtox94.smartdiary.model.EventUpdateUI;
 import com.eraisedtox94.smartdiary.model.FileReadWriteUtil;
-
-import org.greenrobot.eventbus.EventBus;
+import com.eraisedtox94.smartdiary.presenter.mediators.CreateEntryPresenterImpl;
+import com.eraisedtox94.smartdiary.presenter.mediators.IPresenterContract;
 
 import java.io.File;
 
@@ -22,10 +21,20 @@ import java.io.File;
 public class ReadWriteFileAsyncTask extends AsyncTask<String, Integer, String> {
 
     //TODO remove any type of hardcoding and make async task re usable n loosely coupled
-
     private FileReadWriteUtil fileReadWriteUtil = new FileReadWriteUtil();
+    private IPresenterContract.ICreateNewEntryPresenter createNewEntryPresenter;
+    //private CreateEntryPresenterImpl createNewEntryPresenter;
+    private IPresenterContract.IAllEntriesPresenter allEntriesPresenter;
     //default is read
     String type_Of_Flag = "0";
+
+    public ReadWriteFileAsyncTask(IPresenterContract.ICreateNewEntryPresenter createNewEntryPresenter){
+        this.createNewEntryPresenter = createNewEntryPresenter;
+    }
+
+    public ReadWriteFileAsyncTask(IPresenterContract.IAllEntriesPresenter allEntriesPresenter){
+        this.allEntriesPresenter =  allEntriesPresenter;
+    }
 
     @Override
     protected String doInBackground(String... strings) {
@@ -80,9 +89,13 @@ public class ReadWriteFileAsyncTask extends AsyncTask<String, Integer, String> {
             //progressBar.setVisibility(View.INVISIBLE);
             Log.d("check post execute=", "here is string=" + s);
             //inform presenter that you are done
-            EventUpdateUI event = new EventUpdateUI();
-            event.setFileName(s);
-            EventBus.getDefault().post(event);
+            //Todo here we can have some good model
+            if(allEntriesPresenter==null){
+                createNewEntryPresenter.asyncTaskDoneCallback(s);
+            }
+            else{
+                allEntriesPresenter.asyncTaskDoneCallback(s);
+            }
         }
         else{
         }

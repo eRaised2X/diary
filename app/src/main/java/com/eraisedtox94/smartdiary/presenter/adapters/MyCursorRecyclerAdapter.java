@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.eraisedtox94.smartdiary.R;
-import com.eraisedtox94.smartdiary.presenter.AllEntriesPresenterImpl;
-import com.eraisedtox94.smartdiary.presenter.util.IPresenterContract;
+import com.eraisedtox94.smartdiary.presenter.mediators.IPresenterContract;
 
 /**
  * Created by spraful on 06-May-17.
@@ -30,10 +29,10 @@ public class MyCursorRecyclerAdapter extends RecyclerView.Adapter<MyCursorRecycl
 
     Context mContext;
 
-    public MyCursorRecyclerAdapter(Context context, Cursor c) {
+    public MyCursorRecyclerAdapter(Context context, Cursor c, IPresenterContract.IAllEntriesPresenter entriesPresenter) {
 
         mContext = context;
-
+        this.entriesPresenter = entriesPresenter;
         mCursorAdapter = new CursorAdapter(mContext, c, 0) {
 
             //TODO I somehow feel this constructor (i.e MyCursorRecyclerAdapter) is time consuming
@@ -65,11 +64,7 @@ public class MyCursorRecyclerAdapter extends RecyclerView.Adapter<MyCursorRecycl
         String id = ((TextView)view.findViewById(R.id.tvEntryId)).getText().toString();
         Log.d("clicked",id +":is the entryId");
 
-        if(entriesPresenter==null){
-            entriesPresenter = new AllEntriesPresenterImpl();
-        }
         entriesPresenter.listItemClickListener(id);
-
         return;
     }
 
@@ -77,9 +72,6 @@ public class MyCursorRecyclerAdapter extends RecyclerView.Adapter<MyCursorRecycl
     public boolean onLongClick(View view) {
 
         Log.d("got long Clicked",((TextView)view.findViewById(R.id.tvEntryId)).getText()+":is the id clicked");
-        if(entriesPresenter==null){
-            entriesPresenter = new AllEntriesPresenterImpl();
-        }
         String [] a = {"3","4"};
         entriesPresenter.listItemLongClickListener(a);
         return true;

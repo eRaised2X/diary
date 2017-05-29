@@ -8,10 +8,6 @@ import java.util.Locale;
 
 public class AppConstants {
 
-
-    //String for fonts path
-    public static String fontPathBradley = "fonts/bradley_hand.ttf";
-
     //String for File Storage in external storage
     public static String nameOfFolderContainingEntries = "DiaryFiles";
 

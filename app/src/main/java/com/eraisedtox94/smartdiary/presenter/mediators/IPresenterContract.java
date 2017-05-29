@@ -9,18 +9,20 @@ import com.eraisedtox94.smartdiary.view.util.IViewContract;
 public interface IPresenterContract {
 
     interface ICreateNewEntryPresenter {
-        void attachView(IViewContract.ICreateNewEntryView view);
+        void setView(IViewContract.ICreateNewEntryView view);
         void clearPageContent();
         void handleSaveEntry();
         void readFile(String fileName);
         void writeFile(String fileName,String content);
+        void asyncTaskDoneCallback(String content);
     }
 
     interface IAllEntriesPresenter{
         void fillViewWithListOfEntries();
-        void attachView(IViewContract.IListAllEntriesView view);
+        void setView(IViewContract.IListAllEntriesView view);
         void listItemClickListener(String fileId);
         void listItemLongClickListener(String []fileIDs);
+        void asyncTaskDoneCallback(String s);
     }
 
 }

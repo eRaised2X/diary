@@ -21,18 +21,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.eraisedtox94.smartdiary.app.AppUtils;
-import com.eraisedtox94.smartdiary.model.IAppPrefsManagerImpl;
-import com.eraisedtox94.smartdiary.presenter.CreateEntryPresenterImpl;
-import com.eraisedtox94.smartdiary.model.EventUpdateUI;
-import com.eraisedtox94.smartdiary.presenter.IPresenterContract;
-import com.eraisedtox94.smartdiary.presenter.MyCalendarClass;
+import com.eraisedtox94.smartdiary.model.AppPrefsManagerImpl;
+import com.eraisedtox94.smartdiary.presenter.mediators.CreateEntryPresenterImpl;
+import com.eraisedtox94.smartdiary.presenter.mediators.IAppPrefsManager;
+import com.eraisedtox94.smartdiary.presenter.mediators.IPresenterContract;
+import com.eraisedtox94.smartdiary.presenter.util.MyCalendarClass;
 import com.eraisedtox94.smartdiary.R;
 import com.eraisedtox94.smartdiary.model.DiaryEntryContentProvider;
 import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
-import com.eraisedtox94.smartdiary.view.IViewContract;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.eraisedtox94.smartdiary.view.util.IViewContract;
 
 public class FragmentCreateNewEntry extends Fragment implements IViewContract.ICreateNewEntryView, View.OnClickListener {
 
@@ -48,24 +45,34 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
     private View tabView;
 
     private MyCalendarClass mMyCalendarClass;
-    private IAppPrefsManagerImpl mAppPrefsManagerImpl;
+    private IAppPrefsManager appPrefsManager;
     private IPresenterContract.ICreateNewEntryPresenter presenter;
     private MyTextWatcher myTextWatcher;
+
+    public FragmentCreateNewEntry(){
+
+    }
+    public static FragmentCreateNewEntry newInstance() {
+        return new FragmentCreateNewEntry();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         tabView = inflater.inflate(R.layout.fragment_create_new_entry, container, false);
         Log.d("life cycle FragMain", "onCreate called");
-        presenter = new CreateEntryPresenterImpl();
+
         initialise();
         setListeners();
 
-        presenter.attachView(this);
+        presenter.setView(this);
         return tabView;
     }
 
     //initialises private fields
     public void initialise() {
+
+        appPrefsManager = new AppPrefsManagerImpl(getContext());
+        presenter = new CreateEntryPresenterImpl(appPrefsManager);
 
         etTitle = (EditText) tabView.findViewById(R.id.et_title_diary);
         etContent = (EditText) tabView.findViewById(R.id.et_content_diary);
@@ -82,21 +89,13 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         typefaceforContentEditText = Typeface.createFromAsset(getContext().getAssets(), AppUtils.FONT_BRADLEY_RESOURCE_LOCATION);
         etContent.setTypeface(typefaceforContentEditText);
 
-        mAppPrefsManagerImpl = new IAppPrefsManagerImpl(getContext());
         myTextWatcher = new MyTextWatcher();
         mMyCalendarClass = new MyCalendarClass();
 
-        EventBus.getDefault().register(this);
-        presenter.readFile(mAppPrefsManagerImpl.getLastOpenedFileIdFromSharedPref());
+        presenter.readFile(appPrefsManager.getLastOpenedFileIdFromSharedPref());
 
     }
 
-
-    @Subscribe
-    public void onEvent(EventUpdateUI event){
-        Log.d("onEvent","event fired");
-        etContent.setText(event.getFileName());
-    }
 
     public void setListeners() {
         btnSaveEntry.setOnClickListener(this);
@@ -123,6 +122,9 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
 
     @Override
     public void setContentReadFromFile(String content){
+        if(etContent==null){
+            Log.d("etcontent null","FragCreateNewEntry");
+        }
         etContent.setText(content);
     }
 
@@ -131,7 +133,7 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
     public void clearPage() {
         etTitle.setText("");
         etContent.setText("");
-        mAppPrefsManagerImpl.setLastOpenedFileIdInsideSharedPref(null);
+        appPrefsManager.setLastOpenedFileIdInsideSharedPref(null);
     }
 
 
@@ -145,22 +147,20 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         String dateModifiedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
 
         Uri uri = null;
-        String id = mAppPrefsManagerImpl.getLastOpenedFileIdFromSharedPref();
-        if (id == null) {
+        String id = appPrefsManager.getLastOpenedFileIdFromSharedPref();
+        if (id.equals(AppUtils.DEFAULT_FILE_ID)) {
             ContentValues values = new ContentValues();
-            //values.put(DiaryEntryTableUtil.COLUMN_ID, id);
             values.put(DiaryEntryTableUtil.COLUMN_TITLE, titleString);
-            //values.put(DiaryEntryTableUtil.COLUMN_FILENAME, "1");
             values.put(DiaryEntryTableUtil.COLUMN_DATE_CREATED, dateCreatedString);
             values.put(DiaryEntryTableUtil.COLUMN_DATE_MODIFIED, dateModifiedString);
 
             uri = getContext().getContentResolver().insert(
                     DiaryEntryContentProvider.CONTENT_URI, values);
 
-            mAppPrefsManagerImpl.setLastOpenedFileIdInsideSharedPref(uri.getLastPathSegment());
+            appPrefsManager.setLastOpenedFileIdInsideSharedPref(uri.getLastPathSegment());
         }
 
-        presenter.writeFile(mAppPrefsManagerImpl.getLastOpenedFileIdFromSharedPref(),textContent);
+        presenter.writeFile(appPrefsManager.getLastOpenedFileIdFromSharedPref(),textContent);
         Toast.makeText(getContext(), "FILE SAVED", Toast.LENGTH_SHORT).show();
     }
 
@@ -172,6 +172,29 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         Log.d("onViewCreated", "FragCreateEntry");
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("onStart", "FragCreateEntry");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("onResume", "FragCreateEntry");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("onPause", "FragCreateEntry");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("onStop", "FragCreateEntry");
+    }
 
     @Override
     public void onDetach() {
