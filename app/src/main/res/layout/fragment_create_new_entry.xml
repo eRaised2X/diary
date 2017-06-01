@@ -79,14 +79,6 @@
         android:layout_centerVertical="true"
         android:visibility="invisible" />
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="SAVE" />
-
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabButtonNew"
@@ -97,6 +89,18 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/dimen_fab_margin"
         android:src="@drawable/icon_plus"
+        app:backgroundTint="@color/colorFABNew"
+        app:borderWidth="0dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabBtnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/dimen_fab_margin"
+        android:src="@drawable/icon_save"
         app:backgroundTint="@color/colorFABNew"
         app:borderWidth="0dp" />
 
