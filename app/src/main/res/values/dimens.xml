@@ -50,6 +50,11 @@
     <dimen name="dimen_custom_layout_rect_radius">5dp</dimen>
 
     <!--fab button-->
-    <dimen name="dimen_fab_margin">40dp</dimen>
+    <dimen name="dimen_fab_margin">20dp</dimen>
+
+
+    <!--create entry frag margins for phone devices-->
+    <dimen name="diary_title_margin_top">10dp</dimen>
+    <dimen name="diary_title_margin_sides">12dp</dimen>
 
 </resources>

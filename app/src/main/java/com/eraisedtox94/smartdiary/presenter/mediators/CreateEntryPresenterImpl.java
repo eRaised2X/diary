@@ -28,6 +28,7 @@ public class CreateEntryPresenterImpl implements IPresenterContract.ICreateNewEn
     }
 
 
+    //don't get swept by the warning that onEvent in never used, because, it is indeed
     @Subscribe
     public void onEvent(EventPassMsgToOtherPresenter event){
         Log.d("onEvent","event fired");

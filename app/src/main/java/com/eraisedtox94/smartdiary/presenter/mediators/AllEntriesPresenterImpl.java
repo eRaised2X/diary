@@ -27,8 +27,6 @@ public class AllEntriesPresenterImpl implements IPresenterContract.IAllEntriesPr
     LoaderManager loaderManager;
     IAppPrefsManager appPrefsManager;
 
-    ReadWriteFileAsyncTask readWriteFileAsyncTask ;
-
     public AllEntriesPresenterImpl(LoaderManager loaderManager,IAppPrefsManager appPrefsManager){
         this.loaderManager = loaderManager;
         this.appPrefsManager = appPrefsManager;
@@ -56,6 +54,11 @@ public class AllEntriesPresenterImpl implements IPresenterContract.IAllEntriesPr
         EventPassMsgToOtherPresenter event = new EventPassMsgToOtherPresenter();
         event.setFileName(fileName);
         EventBus.getDefault().post(event);
+        if(view == null){
+            view = FragmentListOfEntries.newInstance();
+        }
+        view.switchToTab(0);
+
     }
 
 
