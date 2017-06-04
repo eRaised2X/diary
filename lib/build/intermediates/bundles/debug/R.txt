@@ -1,3 +1,4 @@
+int attr emojiconAlignment 0x7f010003
 int attr emojiconSize 0x7f010000
 int attr emojiconTextLength 0x7f010002
 int attr emojiconTextStart 0x7f010001
@@ -922,7 +923,8 @@ int layout emojicon_item 0x7f030001
 int layout emojicons 0x7f030002
 int string app_name 0x7f050000
 int style emojiDialog 0x7f060000
-int[] styleable Emojicon { 0x7f010000, 0x7f010001, 0x7f010002 }
+int[] styleable Emojicon { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003 }
+int styleable Emojicon_emojiconAlignment 3
 int styleable Emojicon_emojiconSize 0
 int styleable Emojicon_emojiconTextLength 2
 int styleable Emojicon_emojiconTextStart 1

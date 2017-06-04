@@ -24,6 +24,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.text.style.DynamicDrawableSpan;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
@@ -32,49 +33,50 @@ import android.widget.EditText;
  */
 public class EmojiconEditText extends EditText {
     private int mEmojiconSize;
+    private boolean mUseSystemDefault = false;
+    private int mEmojiconTextSize;
 
     private Rect rect;
     private Paint paint;
 
+    private int mEmojiconAlignment;
 
     public EmojiconEditText(Context context) {
         super(context);
         mEmojiconSize = (int) getTextSize();
+        mEmojiconTextSize = (int) getTextSize();
         rect = new Rect();
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.parseColor("#CCC999"));
-
     }
 
     public EmojiconEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
-        rect = new Rect();
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.parseColor("#CCC999"));
     }
 
     public EmojiconEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);
+    }
+
+    private void init(AttributeSet attrs) {
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Emojicon);
+        mEmojiconSize = (int) a.getDimension(R.styleable.Emojicon_emojiconSize, getTextSize());
+        mEmojiconAlignment = a.getInt(R.styleable.Emojicon_emojiconAlignment, DynamicDrawableSpan.ALIGN_BASELINE);
+        a.recycle();
+        mEmojiconTextSize = (int) getTextSize();
+        setText(getText());
         rect = new Rect();
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.parseColor("#CCC999"));
     }
 
-    private void init(AttributeSet attrs) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Emojicon);
-        mEmojiconSize = (int) a.getDimension(R.styleable.Emojicon_emojiconSize, getTextSize());
-        a.recycle();
-        setText(getText());
-    }
-
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-        EmojiconHandler.addEmojis(getContext(), getText(), mEmojiconSize);
+        EmojiconHandler.addEmojis(getContext(), getText(), mEmojiconSize, mEmojiconAlignment, mEmojiconTextSize, mUseSystemDefault);
     }
 
     /**
@@ -82,8 +84,19 @@ public class EmojiconEditText extends EditText {
      */
     public void setEmojiconSize(int pixels) {
         mEmojiconSize = pixels;
+        updateText();
     }
 
+    private void updateText() {
+        EmojiconHandler.addEmojis(getContext(), getText(), mEmojiconSize, mEmojiconAlignment, mEmojiconTextSize, mUseSystemDefault);
+    }
+
+    /**
+     * Set whether to use system default emojicon
+     */
+    public void setUseSystemDefault(boolean useSystemDefault) {
+        mUseSystemDefault = useSystemDefault;
+    }
 
 
     @Override

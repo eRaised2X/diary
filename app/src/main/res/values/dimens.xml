@@ -8,7 +8,7 @@
     <dimen name="text_size_tiny">6sp</dimen>
     <dimen name="text_size_xtiny">8sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size_normal">25sp</dimen>
+    <dimen name="text_size_normal">28sp</dimen>
     <dimen name="text_size_xnormal">16sp</dimen>
     <dimen name="text_size_xxnormal">18sp</dimen>
     <dimen name="text_size_header">20sp</dimen>

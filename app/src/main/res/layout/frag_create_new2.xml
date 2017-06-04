@@ -19,6 +19,7 @@
 
         android:orientation="vertical">
 
+
         <EditText
             android:id="@+id/et_title_diary"
             android:layout_width="match_parent"
@@ -51,7 +52,6 @@
         android:background="@drawable/custom_layout_background"
         android:orientation="vertical">
 
-
         <github.ankushsachdeva.emojicon.EmojiconEditText
             android:id="@+id/emojicon_edit_text"
             android:layout_width="match_parent"
@@ -68,7 +68,9 @@
             android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/text_size_normal"
             android:typeface="sans"
-            emojicon:emojiconSize="28sp" />
+            emojicon:emojiconSize="18sp"
+
+            />
 
         <include
             layout="@layout/bottom_toolbar"

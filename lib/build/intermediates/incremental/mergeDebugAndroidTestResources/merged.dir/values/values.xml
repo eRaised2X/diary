@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="Emojicon"><attr format="dimension" name="emojiconSize"/><attr format="integer" name="emojiconTextStart"/><attr format="integer" name="emojiconTextLength"/></declare-styleable>
+    <declare-styleable name="Emojicon"><attr format="dimension" name="emojiconSize"/><attr format="integer" name="emojiconTextStart"/><attr format="integer" name="emojiconTextLength"/><attr format="integer" name="emojiconAlignment"/></declare-styleable>
     <dimen name="keyboard_height">250dp</dimen>
     <string name="app_name">Emojicon</string>
     <style name="emojiDialog" parent="@android:style/Theme.Dialog">
