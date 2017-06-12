@@ -16,8 +16,9 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
+        android:name=".app.DiaryApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logotrial"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -26,22 +27,23 @@
         Splash screen activity
         launcher
         -->
-        <activity android:name="com.eraisedtox94.smartdiary.SplashScreenActivity">
+        <activity android:name="com.eraisedtox94.smartdiary.view.main.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <!--Main Activity-->
-        <activity android:name="com.eraisedtox94.smartdiary.MainActivity">
+        <activity android:name="com.eraisedtox94.smartdiary.view.main.MainActivity">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <provider
-            android:name="com.eraisedtox94.smartdiary.DiaryEntryContentProvider"
+            android:name="com.eraisedtox94.smartdiary.model.DiaryEntryContentProvider"
             android:authorities="com.eraisedtox94.smartdiary.data.provider"
             android:exported="false"
             android:multiprocess="true" />
