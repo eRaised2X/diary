@@ -40,4 +40,7 @@
     <color name="colorFABNew">#1A237E</color>
     <color name="colorFABNewOnClick">#7986CB</color>
 
+    <!--background color for smiley keyboard-->
+    <color name="colorSmileyBackground">#f5f5f5</color>
+
 </resources>

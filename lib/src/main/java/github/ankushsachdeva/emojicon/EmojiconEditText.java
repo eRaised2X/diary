@@ -20,10 +20,6 @@ import github.ankushsachdeva.emojicon.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
@@ -33,36 +29,20 @@ import android.widget.EditText;
 public class EmojiconEditText extends EditText {
     private int mEmojiconSize;
 
-    private Rect rect;
-    private Paint paint;
-
-
     public EmojiconEditText(Context context) {
         super(context);
         mEmojiconSize = (int) getTextSize();
-        rect = new Rect();
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.parseColor("#CCC999"));
 
     }
 
     public EmojiconEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
-        rect = new Rect();
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.parseColor("#CCC999"));
     }
 
     public EmojiconEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);
-        rect = new Rect();
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.parseColor("#CCC999"));
     }
 
     private void init(AttributeSet attrs) {
@@ -83,28 +63,4 @@ public class EmojiconEditText extends EditText {
     public void setEmojiconSize(int pixels) {
         mEmojiconSize = pixels;
     }
-
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        int height = getHeight();
-        int lineHeight = getLineHeight();
-        int count = height / lineHeight;
-
-        // For long text with scrolling
-        if (getLineCount() > count) {
-            count = getLineCount();
-        }
-
-        // Draw first line
-        int baseline = getLineBounds(0, rect);
-        for (int i = 0; i < count; i++) {
-            canvas.drawLine(rect.left, baseline + 1, rect.right, baseline + 1, paint);
-            // Draw next line
-            baseline += getLineHeight();
-        }
-        super.onDraw(canvas);
-    }
-
 }

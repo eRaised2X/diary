@@ -15,6 +15,7 @@ public interface IPresenterContract {
         void readFile(String fileName);
         void writeFile(String fileName,String content);
         void asyncTaskDoneCallback(String content);
+        void handleEmojiClicked(int emojiIdentifier);
     }
 
     interface IAllEntriesPresenter{

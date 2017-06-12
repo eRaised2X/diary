@@ -9,5 +9,6 @@
     <dimen name="diary_title_margin_top">16dp</dimen>
 
     <!--fab button-->
-    <dimen name="dimen_fab_margin">40dp</dimen>
+    <dimen name="dimen_fab_margin">45dp</dimen>
+
 </resources>

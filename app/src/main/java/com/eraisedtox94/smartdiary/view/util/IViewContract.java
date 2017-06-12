@@ -22,6 +22,7 @@ public interface IViewContract {
         void clearPage();
         void setContentReadFromFile(String data);
         void handleClickOfSave();
+        void putEmoji(int emojiId);
     }
 
 }
