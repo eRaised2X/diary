@@ -8,7 +8,6 @@ package github.ankushsachdeva.emojicon;
 
 public final class R {
 	public static final class attr {
-		public static final int emojiconAlignment = 0x7f010003;
 		public static final int emojiconSize = 0x7f010000;
 		public static final int emojiconTextLength = 0x7f010002;
 		public static final int emojiconTextStart = 0x7f010001;
@@ -947,8 +946,7 @@ public final class R {
 		public static final int emojiDialog = 0x7f060000;
 	}
 	public static final class styleable {
-		public static final int[] Emojicon = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003 };
-		public static final int Emojicon_emojiconAlignment = 3;
+		public static final int[] Emojicon = { 0x7f010000, 0x7f010001, 0x7f010002 };
 		public static final int Emojicon_emojiconSize = 0;
 		public static final int Emojicon_emojiconTextLength = 2;
 		public static final int Emojicon_emojiconTextStart = 1;

@@ -20,11 +20,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.eraisedtox94.smartdiary.app.AppUtils;
+import com.eraisedtox94.smartdiary.emoticon.EmojiconPopupWindow;
+import com.eraisedtox94.smartdiary.emoticon.IEmojiconClickedListener;
+import com.eraisedtox94.smartdiary.emoticon.IEmoticonInterfaces;
 import com.eraisedtox94.smartdiary.model.AppPrefsManagerImpl;
 import com.eraisedtox94.smartdiary.presenter.mediators.CreateEntryPresenterImpl;
 import com.eraisedtox94.smartdiary.presenter.mediators.IAppPrefsManager;
@@ -34,13 +36,11 @@ import com.eraisedtox94.smartdiary.R;
 import com.eraisedtox94.smartdiary.model.DiaryEntryContentProvider;
 import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
 import com.eraisedtox94.smartdiary.view.util.IViewContract;
+import com.eraisedtox94.smartdiary.view.util.LinedEditText;
 
-import github.ankushsachdeva.emojicon.EmojiconEditText;
-import github.ankushsachdeva.emojicon.EmojiconGridView;
-import github.ankushsachdeva.emojicon.EmojiconsPopup;
-import github.ankushsachdeva.emojicon.emoji.Emojicon;
-
-public class FragmentCreateNewEntry extends Fragment implements IViewContract.ICreateNewEntryView, View.OnClickListener {
+public class FragmentCreateNewEntry extends Fragment
+        implements IViewContract.ICreateNewEntryView, View.OnClickListener,
+        IEmojiconClickedListener, IEmoticonInterfaces.OnEmojiconBackspaceClickedListener {
 
 
     private FloatingActionButton floatingActionButtonForbtnSaveEntry;
@@ -48,24 +48,27 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
     private FloatingActionButton floatingActionButtonForCreateNew;
     private ProgressBar progressBar;
     private Typeface typefaceforContentEditText;
-    private EmojiconEditText emojiconEditText ;
+    private LinedEditText emojiconEditText;
     private ImageView emojiButton;
-    //private ImageButton imageButtonKeyBoardChange;
-    private EmojiconsPopup popup;
+    private ImageButton imageButtonKeyBoardChange;
+    private ImageButton imageButtonShowEmojiPopup;
 
     private EditText etTitle;
-    private EditText etContent;
 
     private View tabView;
+    private View rootView;
 
     private MyCalendarClass mMyCalendarClass;
     private IAppPrefsManager appPrefsManager;
     private IPresenterContract.ICreateNewEntryPresenter presenter;
     private MyTextWatcher myTextWatcher;
 
-    public FragmentCreateNewEntry(){
+    EmojiconPopupWindow emojiconPopup;
+
+    public FragmentCreateNewEntry() {
 
     }
+
     public static FragmentCreateNewEntry newInstance() {
         return new FragmentCreateNewEntry();
     }
@@ -79,6 +82,31 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         setListeners();
 
         presenter.setView(this);
+
+        emojiconPopup = new EmojiconPopupWindow(rootView, getContext());
+
+        //emojicon stuff
+        emojiconPopup.setEmojiconClickedListener(this);
+        emojiconPopup.setOnEmojiconBackspaceClickedListener(this);
+
+        //Will automatically set size according to the soft keyboard size
+        emojiconPopup.setSizeForSoftKeyboard();
+
+
+                emojiconPopup.setOnSoftKeyboardOpenCloseListener(new IEmoticonInterfaces.OnSoftKeyboardOpenCloseListener() {
+
+                    @Override
+                    public void onKeyboardOpen(int keyBoardHeight) {
+
+                    }
+
+                    @Override
+                    public void onKeyboardClose() {
+                        if (emojiconPopup.isShowing())
+                            emojiconPopup.dismiss();
+                    }
+                });
+
         return tabView;
 
     }
@@ -89,104 +117,11 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         appPrefsManager = new AppPrefsManagerImpl(getContext());
         presenter = new CreateEntryPresenterImpl(appPrefsManager);
 
-        emojiconEditText = (EmojiconEditText) tabView.findViewById(R.id.emojicon_edit_text);
+        emojiconEditText = (LinedEditText) tabView.findViewById(R.id.emojicon_edit_text);
         emojiButton = (ImageView) tabView.findViewById(R.id.iv_keyboard_alt_black);
-        //imageButtonKeyBoardChange = (ImageButton) tabView.findViewById(R.id.iv_keyboard_alt_black);
+        imageButtonKeyBoardChange = (ImageButton) tabView.findViewById(R.id.iv_keyboard_alt_black);
         imageButtonSave = (ImageButton) tabView.findViewById(R.id.iv_save_black);
-        // Give the topmost view of your activity layout hierarchy. This will be used to measure soft keyboard height
-        popup = new EmojiconsPopup(tabView, getContext());
-        //Will automatically set size according to the soft keyboard size
-        popup.setSizeForSoftKeyboard();
-
-        //If the emoji popup is dismissed, change emojiButton to smiley icon
-        popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-            @Override
-            public void onDismiss() {
-                changeEmojiKeyboardIcon(emojiButton, R.drawable.smiley);
-            }
-        });
-
-        //If the text keyboard closes, also dismiss the emoji popup
-        popup.setOnSoftKeyboardOpenCloseListener(new EmojiconsPopup.OnSoftKeyboardOpenCloseListener() {
-
-            @Override
-            public void onKeyboardOpen(int keyBoardHeight) {
-
-            }
-
-            @Override
-            public void onKeyboardClose() {
-                if(popup.isShowing())
-                    popup.dismiss();
-            }
-        });
-
-
-
-        //On emoji clicked, add it to edittext
-        popup.setOnEmojiconClickedListener(new EmojiconGridView.OnEmojiconClickedListener() {
-
-            @Override
-            public void onEmojiconClicked(Emojicon emojicon) {
-                if (emojiconEditText == null || emojicon == null) {
-                    return;
-                }
-
-                int start = emojiconEditText.getSelectionStart();
-                int end = emojiconEditText.getSelectionEnd();
-                if (start < 0) {
-                    emojiconEditText.append(emojicon.getEmoji());
-                } else {
-                    emojiconEditText.getText().replace(Math.min(start, end),
-                            Math.max(start, end), emojicon.getEmoji(), 0,
-                            emojicon.getEmoji().length());
-                }
-            }
-        });
-        //On backspace clicked, emulate the KEYCODE_DEL key event
-        popup.setOnEmojiconBackspaceClickedListener(new EmojiconsPopup.OnEmojiconBackspaceClickedListener() {
-
-            @Override
-            public void onEmojiconBackspaceClicked(View v) {
-                KeyEvent event = new KeyEvent(
-                        0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
-                emojiconEditText.dispatchKeyEvent(event);
-            }
-        });
-
-        // To toggle between text keyboard and emoji keyboard keyboard(Popup)
-        emojiButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                //If popup is not showing => emoji keyboard is not visible, we need to show it
-                if(!popup.isShowing()){
-
-                    //If keyboard is visible, simply show the emoji popup
-                    if(popup.isKeyBoardOpen()){
-                        popup.showAtBottom();
-                        changeEmojiKeyboardIcon(emojiButton, R.drawable.ic_action_keyboard);
-                    }
-
-                    //else, open the text keyboard first and immediately after that show the emoji popup
-                    else{
-                        emojiconEditText.setFocusableInTouchMode(true);
-                        emojiconEditText.requestFocus();
-                        popup.showAtBottomPending();
-                        final InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputMethodManager.showSoftInput(emojiconEditText, InputMethodManager.SHOW_IMPLICIT);
-                        changeEmojiKeyboardIcon(emojiButton, R.drawable.ic_action_keyboard);
-                    }
-                }
-
-                //If popup is showing, simply dismiss it to show the undelying text keyboard
-                else{
-                    popup.dismiss();
-                }
-            }
-        });
+        imageButtonShowEmojiPopup = (ImageButton) tabView.findViewById(R.id.iv_star_border_black);
 
         etTitle = (EditText) tabView.findViewById(R.id.et_title_diary);
         //etContent = (EditText) tabView.findViewById(R.id.et_content_diary);
@@ -207,8 +142,11 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         myTextWatcher = new MyTextWatcher();
         mMyCalendarClass = new MyCalendarClass();
 
-        presenter.readFile(appPrefsManager.getLastOpenedFileIdFromSharedPref());
 
+        //do initializations before readFile call
+        presenter.readFile(appPrefsManager.getLastOpenedFileIdFromSharedPref());
+        //todo can it go up
+        rootView = tabView.findViewById(R.id.root_view);
 
     }
 
@@ -216,11 +154,12 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
     public void setListeners() {
         //floatingActionButtonForbtnSaveEntry.setOnClickListener(this);
         floatingActionButtonForCreateNew.setOnClickListener(this);
+        imageButtonKeyBoardChange.setOnClickListener(this);
         imageButtonSave.setOnClickListener(this);
+        imageButtonShowEmojiPopup.setOnClickListener(this);
         //etContent.addTextChangedListener(myTextWatcher);
         emojiconEditText.addTextChangedListener(myTextWatcher);
     }
-
 
 
     @Override
@@ -231,6 +170,35 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
                 floatingActionButtonForbtnSaveEntry.setVisibility(View.INVISIBLE);
                 break;
             */
+            case R.id.iv_star_border_black:
+                //If popup is not showing => emoji keyboard is not visible, we need to show it
+                if (!emojiconPopup.isShowing()) {
+
+                    //If keyboard is visible, simply show the emoji popup
+                    if (emojiconPopup.isKeyBoardOpen()) {
+                        emojiconPopup.showAtBottom();
+                        //changeEmojiKeyboardIcon(emojiButton, R.drawable.ic_action_keyboard);
+                    }
+
+                    //else, open the text keyboard first and immediately after that show the emoji popup
+                    else {
+                        emojiconEditText.setFocusableInTouchMode(true);
+                        emojiconEditText.requestFocus();
+                        emojiconPopup.showAtBottomPending();
+                        final InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        inputMethodManager.showSoftInput(emojiconEditText, InputMethodManager.SHOW_IMPLICIT);
+                        //changeEmojiKeyboardIcon(emojiButton, R.drawable.ic_action_keyboard);
+                    }
+                }
+
+                //If popup is showing, simply dismiss it to show the undelying text keyboard
+                else {
+                    emojiconPopup.dismiss();
+                }
+                break;
+            case R.id.iv_keyboard_alt_black:
+                presenter.handleEmojiClicked(0);
+                break;
             case R.id.iv_save_black:
                 presenter.handleSaveEntry();
                 //floatingActionButtonForbtnSaveEntry.setVisibility(View.INVISIBLE);
@@ -245,23 +213,42 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
     }
 
     @Override
-    public void setContentReadFromFile(String content){
+    public void putEmoji(int emojiId) {
+        //TODO emoji may be for title as well.., handle that
+        emojiconEditText.getText().insert(emojiconEditText.getSelectionStart(), "\ud83d\ude01");
+
+        /*
+        this is probably better approach
+        String sampleSmiley = "\ud83d\ude01";
+        int start = Math.max(emojiconEditText.getSelectionStart(), 0);
+        int end = Math.max(emojiconEditText.getSelectionEnd(), 0);
+        emojiconEditText.getText().replace(Math.min(start, end), Math.max(start, end),
+                sampleSmiley, 0, sampleSmiley.length());
+        */
+    }
+
+    @Override
+    public void setContentReadFromFile(String content) {
         //TODO prone to crashes
-        String title= "";
-        String matter ="";
-        if(content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG)!=-1){
-            title = content.substring(0,content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG));
-            matter = content.substring(content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG)+
-                    AppUtils.TITLE_CONTENT_SEPARATOR_FLAG.length(),content.length());
+        Log.d("this is lag", "here");
+        String title = "";
+        String matter = "";
+        if (content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG) != -1) {
+            title = content.substring(0, content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG));
+            matter = content.substring(content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG) +
+                    AppUtils.TITLE_CONTENT_SEPARATOR_FLAG.length(), content.length());
         }
         /*if(etContent == null || etTitle == null){
             Log.d("etContent or etTitle"," is null ,FragCreateNewEntry");
         }
         etContent.setText(matter);
         */
-        if(emojiconEditText == null || etTitle == null){
-            Log.d("emojiconEt or etTitle"," is null ,FragCreateNewEntry");
+        if (emojiconEditText == null || etTitle == null) {
+            Log.d("emojiconEt or etTitle", " is null ,FragCreateNewEntry");
         }
+        Log.d("lag may be here", "as well");
+
+        //todo lazy loading is required here
         emojiconEditText.setText(matter);
         etTitle.setText(title);
     }
@@ -285,7 +272,7 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         String textContent = emojiconEditText.getText().toString();
         textContent = textTitle + AppUtils.TITLE_CONTENT_SEPARATOR_FLAG + textContent;
         String dateCreatedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
-        //todo modified thing to be handled
+        //todo `date modified` thing to be handled
         String dateModifiedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
 
         Uri uri = null;
@@ -302,7 +289,7 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
             appPrefsManager.setLastOpenedFileIdInsideSharedPref(uri.getLastPathSegment());
         }
 
-        presenter.writeFile(appPrefsManager.getLastOpenedFileIdFromSharedPref(),textContent);
+        presenter.writeFile(appPrefsManager.getLastOpenedFileIdFromSharedPref(), textContent);
         Toast.makeText(getContext(), "FILE SAVED", Toast.LENGTH_SHORT).show();
     }
 
@@ -363,7 +350,29 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         Log.d("onAttach context", "FragCreateEntry");
     }
 
+    @Override
+    public void onEmojiconClicked(String emojiChar) {
+        //this stub should handle render emoji at pos
+        Log.d("render emoji ", ":" + emojiChar);
+        int start = emojiconEditText.getSelectionStart();
+        int end = emojiconEditText.getSelectionEnd();
+        if (start < 0) {
+            emojiconEditText.append(emojiChar);
+        } else {
+            emojiconEditText.getText().replace(Math.min(start, end),
+                    Math.max(start, end), emojiChar, 0,
+                    emojiChar.length());
+        }
+    }
 
+    @Override
+    public void onEmojiconBackspaceClicked(View v) {
+        Log.d("receiving delete","keyboard press");
+        //emulate keyboard delete key press here
+        KeyEvent event = new KeyEvent(
+                0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
+        emojiconEditText.dispatchKeyEvent(event);
+    }
 
 
     //this class has stub to observe any change in contentRead in edit text
@@ -377,6 +386,7 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             if (charSequence.length() != 0) {
                 //TODO pass this to presenter probably
+
                 //floatingActionButtonForbtnSaveEntry.setVisibility(View.VISIBLE);
             }
         }
@@ -384,10 +394,6 @@ public class FragmentCreateNewEntry extends Fragment implements IViewContract.IC
         @Override
         public void afterTextChanged(Editable editable) {
         }
-    }
-
-    private void changeEmojiKeyboardIcon(ImageView iconToBeChanged, int drawableResourceId){
-        iconToBeChanged.setImageResource(drawableResourceId);
     }
 
 }

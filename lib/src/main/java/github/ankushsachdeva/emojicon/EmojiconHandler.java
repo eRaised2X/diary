@@ -21,9 +21,6 @@ import android.content.Context;
 import android.text.Spannable;
 import android.util.SparseIntArray;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)
  */
@@ -31,9 +28,8 @@ public final class EmojiconHandler {
     private EmojiconHandler() {
     }
 
-    private static final SparseIntArray sEmojisMap = new SparseIntArray(1029);
+    private static final SparseIntArray sEmojisMap = new SparseIntArray(846);
     private static final SparseIntArray sSoftbanksMap = new SparseIntArray(471);
-    private static Map<String, Integer> sEmojisModifiedMap = new HashMap<String,Integer>();
 
     static {
         // People
@@ -1363,7 +1359,6 @@ public final class EmojiconHandler {
         sSoftbanksMap.put(0xe535, R.drawable.emoji_1f17e);
         sSoftbanksMap.put(0xe536, R.drawable.emoji_1f43e);
         sSoftbanksMap.put(0xe537, R.drawable.emoji_2122);
-
     }
 
     private static boolean isSoftBankEmoji(char c) {
@@ -1384,11 +1379,9 @@ public final class EmojiconHandler {
      * @param context
      * @param text
      * @param emojiSize
-     * @param emojiAlignment
-     * @param textSize
      */
-    public static void addEmojis(Context context, Spannable text, int emojiSize, int emojiAlignment, int textSize) {
-        addEmojis(context, text, emojiSize, emojiAlignment, textSize, 0, -1, false);
+    public static void addEmojis(Context context, Spannable text, int emojiSize) {
+        addEmojis(context, text, emojiSize, 0, -1);
     }
 
     /**
@@ -1397,49 +1390,13 @@ public final class EmojiconHandler {
      * @param context
      * @param text
      * @param emojiSize
-     * @param emojiAlignment
-     * @param textSize
      * @param index
      * @param length
      */
-    public static void addEmojis(Context context, Spannable text, int emojiSize, int emojiAlignment, int textSize, int index, int length) {
-        addEmojis(context, text, emojiSize, emojiAlignment, textSize, index, length, false);
-    }
-
-    /**
-     * Convert emoji characters of the given Spannable to the according emojicon.
-     *
-     * @param context
-     * @param text
-     * @param emojiSize
-     * @param emojiAlignment
-     * @param textSize
-     * @param useSystemDefault
-     */
-    public static void addEmojis(Context context, Spannable text, int emojiSize, int emojiAlignment, int textSize, boolean useSystemDefault) {
-        addEmojis(context, text, emojiSize, emojiAlignment, textSize, 0, -1, useSystemDefault);
-    }
-
-    /**
-     * Convert emoji characters of the given Spannable to the according emojicon.
-     *
-     * @param context
-     * @param text
-     * @param emojiSize
-     * @param emojiAlignment
-     * @param textSize
-     * @param index
-     * @param length
-     * @param useSystemDefault
-     */
-    public static void addEmojis(Context context, Spannable text, int emojiSize, int emojiAlignment, int textSize, int index, int length, boolean useSystemDefault) {
-        if (useSystemDefault) {
-            return;
-        }
-
+    public static void addEmojis(Context context, Spannable text, int emojiSize, int index, int length) {
         int textLength = text.length();
         int textLengthToProcessMax = textLength - index;
-        int textLengthToProcess = length < 0 || length >= textLengthToProcessMax ? textLength : (length + index);
+        int textLengthToProcess = length < 0 || length >= textLengthToProcessMax ? textLength : (length+index);
 
         // remove spans throughout all text
         EmojiconSpan[] oldSpans = text.getSpans(0, textLength, EmojiconSpan.class);
@@ -1465,63 +1422,85 @@ public final class EmojiconHandler {
                     icon = getEmojiResource(context, unicode);
                 }
 
-                if (i + skip < textLengthToProcess) {
+                if (icon == 0 && i + skip < textLengthToProcess) {
                     int followUnicode = Character.codePointAt(text, i + skip);
-                    //Non-spacing mark (Combining mark)
-                    if (followUnicode == 0xfe0f) {
+                    if (followUnicode == 0x20e3) {
                         int followSkip = Character.charCount(followUnicode);
-                        if (i + skip + followSkip < textLengthToProcess) {
-
-                            int nextFollowUnicode = Character.codePointAt(text, i + skip + followSkip);
-                            if (nextFollowUnicode == 0x20e3) {
-                                int nextFollowSkip = Character.charCount(nextFollowUnicode);
-                                int tempIcon = getKeyCapEmoji(unicode);
-
-                                if (tempIcon == 0) {
-                                    followSkip = 0;
-                                    nextFollowSkip = 0;
-                                } else {
-                                    icon = tempIcon;
-                                }
-                                skip += (followSkip + nextFollowSkip);
-                            }
-                        }
-                    } else if (followUnicode == 0x20e3) {
-                        //some older versions of iOS don't use a combining character, instead it just goes straight to the second part
-                        int followSkip = Character.charCount(followUnicode);
-
-                        int tempIcon = getKeyCapEmoji(unicode);
-                        if (tempIcon == 0) {
-                            followSkip = 0;
-                        } else {
-                            icon = tempIcon;
+                        switch (unicode) {
+                            case 0x0031:
+                                icon = R.drawable.emoji_0031;
+                                break;
+                            case 0x0032:
+                                icon = R.drawable.emoji_0032;
+                                break;
+                            case 0x0033:
+                                icon = R.drawable.emoji_0033;
+                                break;
+                            case 0x0034:
+                                icon = R.drawable.emoji_0034;
+                                break;
+                            case 0x0035:
+                                icon = R.drawable.emoji_0035;
+                                break;
+                            case 0x0036:
+                                icon = R.drawable.emoji_0036;
+                                break;
+                            case 0x0037:
+                                icon = R.drawable.emoji_0037;
+                                break;
+                            case 0x0038:
+                                icon = R.drawable.emoji_0038;
+                                break;
+                            case 0x0039:
+                                icon = R.drawable.emoji_0039;
+                                break;
+                            case 0x0030:
+                                icon = R.drawable.emoji_0030;
+                                break;
+                            case 0x0023:
+                                icon = R.drawable.emoji_0023;
+                                break;
+                            default:
+                                followSkip = 0;
+                                break;
                         }
                         skip += followSkip;
-
                     } else {
-                        //handle other emoji modifiers
                         int followSkip = Character.charCount(followUnicode);
-
-                        //TODO seems like we could do this for every emoji type rather than having that giant static map, maybe this is too slow?
-                        String hexUnicode = Integer.toHexString(unicode);
-                        String hexFollowUnicode = Integer.toHexString(followUnicode);
-
-                        String resourceName = "emoji_" + hexUnicode + "_" + hexFollowUnicode;
-
-                        int resourceId = 0;
-                        if (sEmojisModifiedMap.containsKey(resourceName)) {
-                            resourceId = sEmojisModifiedMap.get(resourceName);
-                        } else {
-                            resourceId = context.getResources().getIdentifier(resourceName, "drawable", context.getApplicationContext().getPackageName());
-                            if (resourceId != 0) {
-                                sEmojisModifiedMap.put(resourceName, resourceId);
-                            }
-                        }
-
-                        if (resourceId == 0) {
-                            followSkip = 0;
-                        } else {
-                            icon = resourceId;
+                        switch (unicode) {
+                            case 0x1f1ef:
+                                icon = (followUnicode == 0x1f1f5) ? R.drawable.emoji_1f1ef_1f1f5 : 0;
+                                break;
+                            case 0x1f1fa:
+                                icon = (followUnicode == 0x1f1f8) ? R.drawable.emoji_1f1fa_1f1f8 : 0;
+                                break;
+                            case 0x1f1eb:
+                                icon = (followUnicode == 0x1f1f7) ? R.drawable.emoji_1f1eb_1f1f7 : 0;
+                                break;
+                            case 0x1f1e9:
+                                icon = (followUnicode == 0x1f1ea) ? R.drawable.emoji_1f1e9_1f1ea : 0;
+                                break;
+                            case 0x1f1ee:
+                                icon = (followUnicode == 0x1f1f9) ? R.drawable.emoji_1f1ee_1f1f9 : 0;
+                                break;
+                            case 0x1f1ec:
+                                icon = (followUnicode == 0x1f1e7) ? R.drawable.emoji_1f1ec_1f1e7 : 0;
+                                break;
+                            case 0x1f1ea:
+                                icon = (followUnicode == 0x1f1f8) ? R.drawable.emoji_1f1ea_1f1f8 : 0;
+                                break;
+                            case 0x1f1f7:
+                                icon = (followUnicode == 0x1f1fa) ? R.drawable.emoji_1f1f7_1f1fa : 0;
+                                break;
+                            case 0x1f1e8:
+                                icon = (followUnicode == 0x1f1f3) ? R.drawable.emoji_1f1e8_1f1f3 : 0;
+                                break;
+                            case 0x1f1f0:
+                                icon = (followUnicode == 0x1f1f7) ? R.drawable.emoji_1f1f0_1f1f7 : 0;
+                                break;
+                            default:
+                                followSkip = 0;
+                                break;
                         }
                         skip += followSkip;
                     }
@@ -1529,52 +1508,8 @@ public final class EmojiconHandler {
             }
 
             if (icon > 0) {
-                text.setSpan(new EmojiconSpan(context, icon, emojiSize, emojiAlignment, textSize), i, i + skip, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new EmojiconSpan(context, icon, emojiSize), i, i + skip, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
     }
-
-    private static int getKeyCapEmoji(int unicode) {
-        int icon = 0;
-        switch (unicode) {
-            case 0x0023:
-                icon = R.drawable.emoji_0023;
-                break;
-
-            case 0x0030:
-                icon = R.drawable.emoji_0030;
-                break;
-            case 0x0031:
-                icon = R.drawable.emoji_0031;
-                break;
-            case 0x0032:
-                icon = R.drawable.emoji_0032;
-                break;
-            case 0x0033:
-                icon = R.drawable.emoji_0033;
-                break;
-            case 0x0034:
-                icon = R.drawable.emoji_0034;
-                break;
-            case 0x0035:
-                icon = R.drawable.emoji_0035;
-                break;
-            case 0x0036:
-                icon = R.drawable.emoji_0036;
-                break;
-            case 0x0037:
-                icon = R.drawable.emoji_0037;
-                break;
-            case 0x0038:
-                icon = R.drawable.emoji_0038;
-                break;
-            case 0x0039:
-                icon = R.drawable.emoji_0039;
-                break;
-            default:
-                break;
-        }
-        return icon;
-    }
-
 }

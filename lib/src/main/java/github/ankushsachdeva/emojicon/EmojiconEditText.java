@@ -20,11 +20,6 @@ import github.ankushsachdeva.emojicon.R;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.text.style.DynamicDrawableSpan;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
@@ -33,22 +28,11 @@ import android.widget.EditText;
  */
 public class EmojiconEditText extends EditText {
     private int mEmojiconSize;
-    private boolean mUseSystemDefault = false;
-    private int mEmojiconTextSize;
-
-    private Rect rect;
-    private Paint paint;
-
-    private int mEmojiconAlignment;
 
     public EmojiconEditText(Context context) {
         super(context);
         mEmojiconSize = (int) getTextSize();
-        mEmojiconTextSize = (int) getTextSize();
-        rect = new Rect();
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.parseColor("#CCC999"));
+
     }
 
     public EmojiconEditText(Context context, AttributeSet attrs) {
@@ -64,19 +48,13 @@ public class EmojiconEditText extends EditText {
     private void init(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Emojicon);
         mEmojiconSize = (int) a.getDimension(R.styleable.Emojicon_emojiconSize, getTextSize());
-        mEmojiconAlignment = a.getInt(R.styleable.Emojicon_emojiconAlignment, DynamicDrawableSpan.ALIGN_BASELINE);
         a.recycle();
-        mEmojiconTextSize = (int) getTextSize();
         setText(getText());
-        rect = new Rect();
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.parseColor("#CCC999"));
     }
 
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-        EmojiconHandler.addEmojis(getContext(), getText(), mEmojiconSize, mEmojiconAlignment, mEmojiconTextSize, mUseSystemDefault);
+        EmojiconHandler.addEmojis(getContext(), getText(), mEmojiconSize);
     }
 
     /**
@@ -84,40 +62,5 @@ public class EmojiconEditText extends EditText {
      */
     public void setEmojiconSize(int pixels) {
         mEmojiconSize = pixels;
-        updateText();
     }
-
-    private void updateText() {
-        EmojiconHandler.addEmojis(getContext(), getText(), mEmojiconSize, mEmojiconAlignment, mEmojiconTextSize, mUseSystemDefault);
-    }
-
-    /**
-     * Set whether to use system default emojicon
-     */
-    public void setUseSystemDefault(boolean useSystemDefault) {
-        mUseSystemDefault = useSystemDefault;
-    }
-
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        int height = getHeight();
-        int lineHeight = getLineHeight();
-        int count = height / lineHeight;
-
-        // For long text with scrolling
-        if (getLineCount() > count) {
-            count = getLineCount();
-        }
-
-        // Draw first line
-        int baseline = getLineBounds(0, rect);
-        for (int i = 0; i < count; i++) {
-            canvas.drawLine(rect.left, baseline + 1, rect.right, baseline + 1, paint);
-            // Draw next line
-            baseline += getLineHeight();
-        }
-        super.onDraw(canvas);
-    }
-
 }

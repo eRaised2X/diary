@@ -80,8 +80,18 @@ public class CreateEntryPresenterImpl implements IPresenterContract.ICreateNewEn
             Log.d("createEntryView is null","reached");
             createEntryView = FragmentCreateNewEntry.newInstance();
         }
+        Log.d("createEntryView ","not null");
         createEntryView.setContentReadFromFile(content);
 
     }
 
+    @Override
+    public void handleEmojiClicked(int emojiIdentifier) {
+        if(createEntryView == null){
+            Log.d("createEntryView-gotNull","here");
+            createEntryView = FragmentCreateNewEntry.newInstance();
+        }
+        Log.d("createEntryView "," here not null");
+        createEntryView.putEmoji(emojiIdentifier);
+    }
 }

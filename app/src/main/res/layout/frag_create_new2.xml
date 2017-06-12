@@ -52,12 +52,13 @@
         android:background="@drawable/custom_layout_background"
         android:orientation="vertical">
 
-        <github.ankushsachdeva.emojicon.EmojiconEditText
+
+        <com.eraisedtox94.smartdiary.view.util.LinedEditText
             android:id="@+id/emojicon_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/content_hint"
             android:gravity="top"
+            android:hint="@string/content_hint"
             android:inputType="textMultiLine|textNoSuggestions"
             android:padding="@dimen/margin_padding_small"
             android:scrollbars="vertical"
@@ -67,10 +68,7 @@
             android:shadowRadius="2"
             android:textCursorDrawable="@drawable/color_cursor"
             android:textSize="@dimen/text_size_normal"
-            android:typeface="sans"
-            emojicon:emojiconSize="18sp"
-
-            />
+            android:typeface="sans" />
 
         <include
             layout="@layout/bottom_toolbar"

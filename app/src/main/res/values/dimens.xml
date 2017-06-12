@@ -57,4 +57,7 @@
     <dimen name="diary_title_margin_top">10dp</dimen>
     <dimen name="diary_title_margin_sides">12dp</dimen>
 
+
+    <!--emoji keyboard default height-->
+    <dimen name="keyboard_height">200dp</dimen>
 </resources>

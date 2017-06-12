@@ -9,14 +9,6 @@ package github.ankushsachdeva.emojicon.test;
 
 public final class R {
     public static final class attr {
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int emojiconAlignment=0x7f010003;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -984,33 +976,17 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Emojicon_emojiconAlignment github.ankushsachdeva.emojicon.test:emojiconAlignment}</code></td><td></td></tr>
            <tr><td><code>{@link #Emojicon_emojiconSize github.ankushsachdeva.emojicon.test:emojiconSize}</code></td><td></td></tr>
            <tr><td><code>{@link #Emojicon_emojiconTextLength github.ankushsachdeva.emojicon.test:emojiconTextLength}</code></td><td></td></tr>
            <tr><td><code>{@link #Emojicon_emojiconTextStart github.ankushsachdeva.emojicon.test:emojiconTextStart}</code></td><td></td></tr>
            </table>
-           @see #Emojicon_emojiconAlignment
            @see #Emojicon_emojiconSize
            @see #Emojicon_emojiconTextLength
            @see #Emojicon_emojiconTextStart
          */
         public static final int[] Emojicon = {
-            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003
+            0x7f010000, 0x7f010001, 0x7f010002
         };
-        /**
-          <p>This symbol is the offset where the {@link github.ankushsachdeva.emojicon.test.R.attr#emojiconAlignment}
-          attribute's value can be found in the {@link #Emojicon} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name github.ankushsachdeva.emojicon.test:emojiconAlignment
-        */
-        public static final int Emojicon_emojiconAlignment = 3;
         /**
           <p>This symbol is the offset where the {@link github.ankushsachdeva.emojicon.test.R.attr#emojiconSize}
           attribute's value can be found in the {@link #Emojicon} array.
