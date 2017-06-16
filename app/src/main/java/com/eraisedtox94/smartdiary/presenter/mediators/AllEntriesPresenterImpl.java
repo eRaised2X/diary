@@ -6,7 +6,9 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
+import android.view.View;
 
+import com.eraisedtox94.smartdiary.R;
 import com.eraisedtox94.smartdiary.model.DiaryEntryContentProvider;
 import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
 import com.eraisedtox94.smartdiary.model.EventPassMsgToOtherPresenter;
@@ -15,6 +17,8 @@ import com.eraisedtox94.smartdiary.view.main.FragmentListOfEntries;
 import com.eraisedtox94.smartdiary.view.util.IViewContract;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
 
 /**
  * Created by spraful on 18-May-17.
@@ -67,11 +71,16 @@ public class AllEntriesPresenterImpl implements IPresenterContract.IAllEntriesPr
         //Todo
     }
     @Override
-    public void listItemLongClickListener(String[] fileNames) {
+    public void listItemLongClickListener() {
         Log.d("event bus","might be used here");
+        view.showBottomToolbar();
         if(view == null){
             view = FragmentListOfEntries.newInstance();
         }
+    }
+
+    @Override
+    public void handleActionDeleteEntries(ArrayList<String> fileNames){
         view.deleteListItems(fileNames);
     }
 

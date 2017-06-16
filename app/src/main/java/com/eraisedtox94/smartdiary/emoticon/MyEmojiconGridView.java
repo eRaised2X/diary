@@ -2,9 +2,11 @@ package com.eraisedtox94.smartdiary.emoticon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.eraisedtox94.smartdiary.R;
@@ -26,14 +28,15 @@ public class MyEmojiconGridView {
         mEmojiconPopup = emojiconPopup;
         rootView = inflater.inflate(R.layout.my_emojicon_grid, null);
 
-        GridView gridView = (GridView) rootView.findViewById(R.id.my_Emoji_GridView);
+        final GridView gridView = (GridView) rootView.findViewById(R.id.my_Emoji_GridView);
+
         if (emojicons== null) {
             mData = People.getData();
         } else {
             Object[] o = (Object[]) emojicons;
             mData = Arrays.asList(o).toArray(new MyEmojicon[o.length]);
         }
-        MyEmojiAdapter mAdapter = new MyEmojiAdapter(rootView.getContext(), mData);
+        final MyEmojiAdapter mAdapter = new MyEmojiAdapter(rootView.getContext(), mData);
         mAdapter.setEmojiClickListener(new IEmojiconClickedListener() {
 
             @Override
@@ -41,8 +44,8 @@ public class MyEmojiconGridView {
                 if (mEmojiconPopup.emojiconClickedListener != null) {
                     mEmojiconPopup.emojiconClickedListener.onEmojiconClicked(emojiChar);
                     Log.d("emoji Click in gridview","="+emojiChar);
-                }
 
+                }
             }
         });
         gridView.setAdapter(mAdapter);

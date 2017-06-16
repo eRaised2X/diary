@@ -49,8 +49,8 @@ public class EmojiconPopupWindow extends PopupWindow implements ViewPager.OnPage
 
 
     private int[] imageButtonResources = {
-            R.drawable.icon_happy_face_white,
-            R.drawable.icon_happy_face_dark,
+            R.drawable.icon_happy_white,
+            R.drawable.icon_happy_light,
             R.drawable.icon_plum_white,
             R.drawable.icon_plum_dark,
             R.drawable.icon_dog_white,
@@ -64,6 +64,10 @@ public class EmojiconPopupWindow extends PopupWindow implements ViewPager.OnPage
             R.drawable.icon_spade_white,
             R.drawable.icon_spade_dark,
             R.drawable.icon_keyboard_delete_dark};
+
+    int resourceIdForEmojiTabIcons[] = {R.id.my_emojis_tab_1_people, R.id.my_emojis_tab_2_food, R.id.my_emojis_tab_3_nature,
+    R.id.my_emojis_tab_4_sports, R.id.my_emojis_tab_5_transport, R.id.my_emojis_tab_6_daily, R.id.my_emojis_tab_7_symbols,
+            R.id.my_emojis_tab_8_backspace};
 
     private ViewPager emojisViewPager;
 
@@ -140,46 +144,52 @@ public class EmojiconPopupWindow extends PopupWindow implements ViewPager.OnPage
     //light 1 3 5 7 9 11 13
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
+        handleEmojiTabHighlighting(view.getId());
+    }
+
+
+    public void handleEmojiTabHighlighting(int viewId){
+
+        switch (viewId) {
             case R.id.my_emojis_tab_1_people:
                 emojisViewPager.setCurrentItem(0);
-                handleEmojiTabHighlighting(imageButtonResources[0],imageButtonResources[3],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[0],imageButtonResources[3],
                         imageButtonResources[5],imageButtonResources[7],imageButtonResources[9],
                         imageButtonResources[11], imageButtonResources[13],imageButtonResources[14]);
                 break;
             case R.id.my_emojis_tab_2_food:
                 emojisViewPager.setCurrentItem(1);
-                handleEmojiTabHighlighting(imageButtonResources[1],imageButtonResources[2],imageButtonResources[5],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[1],imageButtonResources[2],imageButtonResources[5],
                         imageButtonResources[7],imageButtonResources[9],imageButtonResources[11],
                         imageButtonResources[13], imageButtonResources[14]);
                 break;
             case R.id.my_emojis_tab_3_nature:
                 emojisViewPager.setCurrentItem(2);
-                handleEmojiTabHighlighting(imageButtonResources[1],imageButtonResources[3],imageButtonResources[4],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[1],imageButtonResources[3],imageButtonResources[4],
                         imageButtonResources[7],imageButtonResources[9],imageButtonResources[11],
                         imageButtonResources[13], imageButtonResources[14]);
                 break;
             case R.id.my_emojis_tab_4_sports:
                 emojisViewPager.setCurrentItem(3);
-                handleEmojiTabHighlighting(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
                         imageButtonResources[6],imageButtonResources[9],imageButtonResources[11],
                         imageButtonResources[13], imageButtonResources[14]);
                 break;
             case R.id.my_emojis_tab_5_transport:
                 emojisViewPager.setCurrentItem(4);
-                handleEmojiTabHighlighting(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
                         imageButtonResources[7],imageButtonResources[8],imageButtonResources[11],
                         imageButtonResources[13], imageButtonResources[14]);
                 break;
             case R.id.my_emojis_tab_6_daily:
                 emojisViewPager.setCurrentItem(5);
-                handleEmojiTabHighlighting(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
                         imageButtonResources[7],imageButtonResources[9],imageButtonResources[10],
                         imageButtonResources[13], imageButtonResources[14]);
                 break;
             case R.id.my_emojis_tab_7_symbols:
                 emojisViewPager.setCurrentItem(6);
-                handleEmojiTabHighlighting(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
                         imageButtonResources[7],imageButtonResources[9],imageButtonResources[11],
                         imageButtonResources[12], imageButtonResources[14]);
                 break;
@@ -187,18 +197,17 @@ public class EmojiconPopupWindow extends PopupWindow implements ViewPager.OnPage
                 //TODO //for delete key..
                 //imageButtonResources[15] should be put
                 emojisViewPager.setCurrentItem(7);
-                handleEmojiTabHighlighting(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
+                setImagesForEmojiTabHighlightEffect(imageButtonResources[1],imageButtonResources[3],imageButtonResources[5],
                         imageButtonResources[7],imageButtonResources[9],imageButtonResources[11],
                         imageButtonResources[13], imageButtonResources[14]);
                 break;
             default:
                 break;
         }
-
     }
 
-    public void handleEmojiTabHighlighting(int idBtn1, int idBtn2, int idBtn3, int idBtn4,
-                                           int idBtn5, int idBtn6, int idBtn7, int idBtn8) {
+    public void setImagesForEmojiTabHighlightEffect(int idBtn1, int idBtn2, int idBtn3, int idBtn4,
+                                                    int idBtn5, int idBtn6, int idBtn7, int idBtn8) {
         imageButtonTab1.setImageResource(idBtn1);
         imageButtonTab2.setImageResource(idBtn2);
         imageButtonTab3.setImageResource(idBtn3);
@@ -432,7 +441,8 @@ public class EmojiconPopupWindow extends PopupWindow implements ViewPager.OnPage
 
     @Override
     public void onPageSelected(int position) {
-
+        Log.d("onPageSelected pos=",position+"");
+        handleEmojiTabHighlighting(resourceIdForEmojiTabIcons[position]);
     }
 
     @Override

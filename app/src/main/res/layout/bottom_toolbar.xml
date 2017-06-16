@@ -1,19 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll_bottom_actionbar"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@drawable/background_toolbar"
-    android:minHeight="?attr/actionBarSize"
+    android:layout_height="@dimen/bottom_toolbar_height"
+    android:background="@color/colorPrimaryDark"
     android:orientation="horizontal"
     android:weightSum="5"
     >
 
 
-    <View
+    <!--<View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorMyWhite"/>
+        -->
+
     <ImageButton
         android:id="@+id/iv_keyboard_alt_black"
         android:layout_width="0dp"
@@ -22,13 +22,12 @@
         android:clickable="true"
         android:hapticFeedbackEnabled="true"
         android:background="@drawable/button_background"
-        android:src="@drawable/icon_keyboard_alt_grey" />
+        android:src="@drawable/icon_happy_white" />
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"/>
-
+        android:background="@color/colorMyWhite"/>
     <ImageButton
         android:id="@+id/iv_star_border_black"
         android:layout_width="0dp"
@@ -37,12 +36,11 @@
         android:clickable="true"
         android:hapticFeedbackEnabled="true"
         android:background="@drawable/button_background"
-        android:src="@drawable/icon_favorite_outline_grey" />
+        android:src="@drawable/icon_mark_favorite_white" />
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"/>
-
+        android:background="@color/colorMyWhite"/>
     <ImageButton
         android:id="@+id/iv_save_black"
         android:layout_width="0dp"
@@ -51,25 +49,11 @@
         android:clickable="true"
         android:background="@drawable/button_background"
         android:hapticFeedbackEnabled="true"
-        android:src="@drawable/icon_save_grey" />
+        android:src="@drawable/icon_save_white" />
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"/>
-
-    <ImageButton
-        android:id="@+id/iv_cloud_upload_black"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:clickable="true"
-        android:background="@drawable/button_background"
-        android:hapticFeedbackEnabled="true"
-        android:src="@drawable/icon_cloud_upload_grey" />
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorMyWhite"/>
 
     <ImageButton
         android:id="@+id/iv_font_option_black"
@@ -79,10 +63,27 @@
         android:clickable="true"
         android:hapticFeedbackEnabled="true"
         android:background="@drawable/button_background"
-        android:src="@drawable/icon_temp_font_option" />
+        android:src="@drawable/icon_text_color_white" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorMyWhite"/>
+    <ImageButton
+        android:id="@+id/iv_cloud_upload_black"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:background="@drawable/button_background"
+        android:hapticFeedbackEnabled="true"
+        android:src="@drawable/icon_upload_to_cloud_white" />
+
+    <!--
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"/>
+        -->
 
 </LinearLayout>

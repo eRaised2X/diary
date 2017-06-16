@@ -85,13 +85,12 @@ public class CreateEntryPresenterImpl implements IPresenterContract.ICreateNewEn
 
     }
 
-    @Override
+    /*@Override
     public void handleEmojiClicked(int emojiIdentifier) {
         if(createEntryView == null){
             Log.d("createEntryView-gotNull","here");
             createEntryView = FragmentCreateNewEntry.newInstance();
         }
         Log.d("createEntryView "," here not null");
-        createEntryView.putEmoji(emojiIdentifier);
-    }
+    }*/
 }

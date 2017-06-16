@@ -5,8 +5,11 @@
     #005A66
     -->
 
-    <color name="colorPrimaryDark">#1A237E</color>
-    <!--#303F9F
+    <color name="colorPrimaryDark">#30435a</color>
+    <!--
+    earlier
+    1A237E
+    #303F9F
     #00444D
     -->
     <color name="colorAccent">#e1bee7</color>
@@ -25,8 +28,11 @@
 
     <!--color scheme related to diary main xml layout-->
     <color name="colorCustomLayoutBackground">#fff</color>
-    <color name="colorDiaryMainLayoutBackground">#C5CAE9</color>
-    <!--#7e57c2
+    <color name="colorDiaryMainLayoutBackground">#7e93af</color>
+    <!--
+    earlier
+    C5CAE9
+    #7e57c2
     5C6BC0
     E8EAF6
 
@@ -35,9 +41,12 @@
 
     <!--basic color by names-->
     <color name="colorMyWhite">#fff</color>
+    <color name="colorMyLightGrey">#eeeeee</color>
 
     <!--color scheme for FAB button-->
-    <color name="colorFABNew">#1A237E</color>
+    <color name="colorFABNew">#7e93af</color>
+    <!--earlier
+    1A237E-->
     <color name="colorFABNewOnClick">#7986CB</color>
 
     <!--background color for smiley keyboard-->

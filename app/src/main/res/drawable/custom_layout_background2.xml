@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="@dimen/dimen_custom_layout_padding"
+    android:shape="rectangle">
 
-</selector>
+    <solid android:color="@color/colorCustomLayoutBackground"></solid>
+    <corners
+        android:topLeftRadius="@dimen/dimen_custom_layout_rect_radius"
+        android:topRightRadius="@dimen/dimen_custom_layout_rect_radius" />
+</shape>

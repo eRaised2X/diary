@@ -7,7 +7,7 @@
     android:background="@color/colorDiaryMainLayoutBackground">
 
     <LinearLayout
-        android:id="@+id/ll_diary_title"
+        android:id="@+id/rl_diary_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_layout_title_height"
         android:background="@drawable/custom_layout_background"
@@ -42,7 +42,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/custom_layout_background"
         android:orientation="vertical"
-        android:layout_below="@id/ll_diary_title"
+        android:layout_below="@id/rl_diary_title"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin">

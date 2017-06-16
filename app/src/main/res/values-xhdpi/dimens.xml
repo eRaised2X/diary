@@ -1,13 +1,56 @@
 <resources>
-    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
-             (such as screen margins) for screens with more than 820dp of available width. This
-             would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
-    <dimen name="activity_horizontal_margin">64dp</dimen>
 
-    <!--create entry frag margins for tab devices-->
-    <dimen name="diary_title_margin_sides">16dp</dimen>
-    <dimen name="diary_title_margin_top">16dp</dimen>
+    <!--this dimen file would be used for
+    values-xhdpi            4.7”   1280x720 xhdpi
+    values-xhdpi            4.65”  720x1280 xhdpi
+    -->
 
-    <!--fab button-->
-    <dimen name="dimen_fab_margin">45dp</dimen>
+    <!--screen margins-->
+    <dimen name="activity_horizontal_margin">8dp</dimen>
+    <dimen name="activity_vertical_margin">8dp</dimen>
+
+
+    <!-- Text Size -->
+    <dimen name="text_size_tiny">12sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_normal">18sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_huge">28sp</dimen>
+
+    <!-- Margin & padding -->
+    <dimen name="margin_padding_tiny">5dp</dimen>
+    <dimen name="margin_padding_small">6dp</dimen>
+    <dimen name="margin_padding_normal">8dp</dimen>
+    <dimen name="margin_padding_large">12dp</dimen>
+
+    <dimen name="spacing">8dp</dimen>
+    <dimen name="icon_width_height">34dp</dimen>
+
+
+    <!--custom layout dimens-->
+    <dimen name="dimen_layout_title_height">36dp</dimen>
+    <dimen name="dimen_custom_layout_padding">8dp</dimen>
+    <dimen name="dimen_custom_layout_rect_radius">4dp</dimen>
+
+    <dimen name="diary_title_margin_top">7dp</dimen>
+    <dimen name="diary_title_margin_sides">6dp</dimen>
+
+    <!--fab create entry button-->
+    <dimen name="dimen_fab_margin">10dp</dimen>
+
+    <!--emoji keyboard default height-->
+    <dimen name="keyboard_height">200dp</dimen>
+
+    <!--bottom toobar height-->
+    <dimen name="bottom_toolbar_height">40dp</dimen>
+
+
+
+    <!--Tab Layout design dimens-->
+    <dimen name="tab_max_width">0dp</dimen>
+    <dimen name="dimen_tab_indicator_height">4dp</dimen>
+    <dimen name="dimen_tab_padding_start">10dp</dimen>
+    <dimen name="dimen_tab_padding_end">10dp</dimen>
+    <dimen name="dimen_tab_text_size">14sp</dimen>
+
 </resources>

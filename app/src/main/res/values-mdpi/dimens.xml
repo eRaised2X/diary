@@ -1,13 +1,55 @@
 <resources>
-    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
-             (such as screen margins) for screens with more than 820dp of available width. This
-             would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
-    <dimen name="activity_horizontal_margin">64dp</dimen>
 
-    <!--create entry frag margins for tab devices-->
-    <dimen name="diary_title_margin_sides">16dp</dimen>
-    <dimen name="diary_title_margin_top">16dp</dimen>
+    <!--this dimen file would be used for
+    values-mdpi             3.2” 320x480 mdpi
+    -->
 
-    <!--fab button-->
-    <dimen name="dimen_fab_margin">45dp</dimen>
+
+    <!--screen margins-->
+    <dimen name="activity_horizontal_margin">7dp</dimen>
+    <dimen name="activity_vertical_margin">7dp</dimen>
+
+
+    <!-- Text Size -->
+    <dimen name="text_size_tiny">8sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_huge">24sp</dimen>
+
+    <!-- Margin & padding -->
+    <dimen name="margin_padding_tiny">5dp</dimen>
+    <dimen name="margin_padding_small">6dp</dimen>
+    <dimen name="margin_padding_normal">8dp</dimen>
+    <dimen name="margin_padding_large">10dp</dimen>
+
+    <dimen name="spacing">8dp</dimen>
+    <dimen name="icon_width_height">25dp</dimen>
+
+
+    <!--custom layout dimens-->
+    <dimen name="dimen_layout_title_height">32dp</dimen>
+    <dimen name="dimen_custom_layout_padding">6dp</dimen>
+    <dimen name="dimen_custom_layout_rect_radius">3dp</dimen>
+
+    <dimen name="diary_title_margin_top">7dp</dimen>
+    <dimen name="diary_title_margin_sides">5dp</dimen>
+
+    <!--fab create entry button-->
+    <dimen name="dimen_fab_margin">6dp</dimen>
+
+    <!--emoji keyboard default height-->
+    <dimen name="keyboard_height">180dp</dimen>
+
+    <!--bottom toobar height-->
+    <dimen name="bottom_toolbar_height">38dp</dimen>
+
+
+    <!--Tab Layout design dimens-->
+    <dimen name="tab_max_width">0dp</dimen>
+    <dimen name="dimen_tab_indicator_height">3dp</dimen>
+    <dimen name="dimen_tab_padding_start">6dp</dimen>
+    <dimen name="dimen_tab_padding_end">6dp</dimen>
+    <dimen name="dimen_tab_text_size">12sp</dimen>
+
 </resources>

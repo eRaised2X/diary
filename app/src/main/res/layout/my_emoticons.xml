@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorFABNew">
+    android:layout_height="@dimen/bottom_toolbar_height"
+    android:background="@color/colorMyLightGrey">
 
     <LinearLayout
         android:id="@+id/my_emojis_tab"
@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:scaleType="center"
-            android:src="@drawable/icon_happy_face_white" />
+            android:src="@drawable/icon_happy_white" />
 
         <View
             android:layout_width="1px"
