@@ -1,63 +1,55 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--this dimen file would be used for by default
+    is exact same as dimens for xhdpi
+    generally suitable for around 5"
+    -->
+
+    <!--screen margins-->
+    <dimen name="activity_horizontal_margin">8dp</dimen>
+    <dimen name="activity_vertical_margin">8dp</dimen>
 
 
     <!-- Text Size -->
-    <dimen name="text_size_tiny">6sp</dimen>
-    <dimen name="text_size_xtiny">8sp</dimen>
-    <dimen name="text_size_small">12sp</dimen>
-    <dimen name="text_size_normal">28sp</dimen>
-    <dimen name="text_size_xnormal">16sp</dimen>
-    <dimen name="text_size_xxnormal">18sp</dimen>
-    <dimen name="text_size_header">20sp</dimen>
+    <dimen name="text_size_tiny">12sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_normal">18sp</dimen>
     <dimen name="text_size_large">24sp</dimen>
-    <dimen name="text_size_xlarge">26sp</dimen>
-    <dimen name="text_size_xxlarge">28sp</dimen>
-    <dimen name="text_size_huge">30sp</dimen>
-    <dimen name="text_width_height">170dp</dimen>
-    <dimen name="text_size_height">30dp</dimen>
+    <dimen name="text_size_huge">28sp</dimen>
 
     <!-- Margin & padding -->
-    <dimen name="margin_padding_tiny">4dp</dimen>
-    <dimen name="margin_padding_xtiny">6dp</dimen>
-    <dimen name="margin_padding_small">4dp</dimen>
-    <dimen name="margin_padding_xsmall">12dp</dimen>
-    <dimen name="margin_padding_normal">15dp</dimen>
-    <dimen name="margin_padding_xnormal">20dp</dimen>
-    <dimen name="margin_padding_xxnormal">25dp</dimen>
-    <dimen name="margin_padding_large">30dp</dimen>
-    <dimen name="margin_padding_xlarge">40dp</dimen>
-    <dimen name="margin_padding_xxlarge">50dp</dimen>
-    <dimen name="margin_large">70dp</dimen>
-    <dimen name="spacing">9dp</dimen>
-    <dimen name="dividerHeight">8dp</dimen>
-    <dimen name="icon_width_height">30dp</dimen>
+    <dimen name="margin_padding_tiny">5dp</dimen>
+    <dimen name="margin_padding_small">6dp</dimen>
+    <dimen name="margin_padding_normal">8dp</dimen>
+    <dimen name="margin_padding_large">12dp</dimen>
+
+    <dimen name="spacing">8dp</dimen>
+    <dimen name="icon_width_height">34dp</dimen>
 
 
-    <!--Tab design dimens-->
+    <!--custom layout dimens-->
+    <dimen name="dimen_layout_title_height">36dp</dimen>
+    <dimen name="dimen_custom_layout_padding">8dp</dimen>
+    <dimen name="dimen_custom_layout_rect_radius">4dp</dimen>
+
+    <dimen name="diary_title_margin_top">7dp</dimen>
+    <dimen name="diary_title_margin_sides">6dp</dimen>
+
+    <!--fab create entry button-->
+    <dimen name="dimen_fab_margin">10dp</dimen>
+
+    <!--emoji keyboard default height-->
+    <dimen name="keyboard_height">200dp</dimen>
+
+
+    <!--bottom toobar height-->
+    <dimen name="bottom_toolbar_height">40dp</dimen>
+
+
+    <!--Tab Layout design dimens-->
     <dimen name="tab_max_width">0dp</dimen>
     <dimen name="dimen_tab_indicator_height">4dp</dimen>
     <dimen name="dimen_tab_padding_start">10dp</dimen>
     <dimen name="dimen_tab_padding_end">10dp</dimen>
     <dimen name="dimen_tab_text_size">14sp</dimen>
-
-
-    <!--custom layout dimens-->
-    <dimen name="dimen_layout_title_height">40dp</dimen>
-    <dimen name="dimen_custom_layout_padding">10dp</dimen>
-    <dimen name="dimen_custom_layout_rect_radius">5dp</dimen>
-
-    <!--fab button-->
-    <dimen name="dimen_fab_margin">20dp</dimen>
-
-
-    <!--create entry frag margins for phone devices-->
-    <dimen name="diary_title_margin_top">10dp</dimen>
-    <dimen name="diary_title_margin_sides">12dp</dimen>
-
-
-    <!--emoji keyboard default height-->
-    <dimen name="keyboard_height">200dp</dimen>
 </resources>

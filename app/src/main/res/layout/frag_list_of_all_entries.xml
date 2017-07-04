@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorMyWhite">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_all_entries"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
-</LinearLayout>
+        android:layout_above="@+id/rl_list_bottomToolbar" />
+
+    <RelativeLayout
+        android:id="@+id/rl_list_bottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_toolbar_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_deleteListItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/icon_delete_black" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorMyWhite" />
+
+        <ImageView
+            android:id="@+id/iv_cancelDeleteListItems"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+    </RelativeLayout>
+</RelativeLayout>

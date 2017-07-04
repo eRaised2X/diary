@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_view"
+    android:id="@+id/root_view_create_entry_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorDiaryMainLayoutBackground"
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/ll_diary_title"
+        android:id="@+id/rl_diary_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_layout_title_height"
         android:layout_marginLeft="@dimen/diary_title_margin_sides"
@@ -27,7 +26,7 @@
             android:background="@android:color/transparent"
             android:ems="10"
             android:fadingEdge="vertical"
-            android:gravity="top"
+            android:gravity="bottom"
             android:hint="@string/title_hint"
             android:inputType="textPersonName"
             android:padding="@dimen/margin_padding_small"
@@ -45,11 +44,12 @@
         android:id="@+id/ll_diary_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_diary_title"
+        android:layout_above="@+id/toolbar_include"
+        android:layout_below="@id/rl_diary_title"
         android:layout_marginLeft="@dimen/diary_title_margin_sides"
         android:layout_marginRight="@dimen/diary_title_margin_sides"
         android:layout_marginTop="@dimen/diary_title_margin_top"
-        android:background="@drawable/custom_layout_background"
+        android:background="@drawable/custom_layout_background2"
         android:orientation="vertical">
 
 
@@ -57,6 +57,8 @@
             android:id="@+id/emojicon_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fadingEdge="vertical"
             android:gravity="top"
             android:hint="@string/content_hint"
             android:inputType="textMultiLine|textNoSuggestions"
@@ -67,31 +69,33 @@
             android:shadowDy="1"
             android:shadowRadius="2"
             android:textCursorDrawable="@drawable/color_cursor"
-            android:textSize="@dimen/text_size_normal"
+            android:textSize="@dimen/text_size_large"
             android:typeface="sans" />
-
-        <include
-            layout="@layout/bottom_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentBottom="true" />
 
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabButtonNew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_above="@id/ll_bottom_actionbar"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/dimen_fab_margin"
-
             android:src="@drawable/icon_plus"
             app:backgroundTint="@color/colorFABNew"
             app:borderWidth="0dp" />
 
     </RelativeLayout>
 
+
+    <include
+        android:id="@+id/toolbar_include"
+        layout="@layout/bottom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_toolbar_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/diary_title_margin_sides"
+        android:layout_marginRight="@dimen/diary_title_margin_sides" />
 
     <ProgressBar
         android:id="@+id/pbarDiaryMain"

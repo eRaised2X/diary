@@ -8,4 +8,5 @@
     android:horizontalSpacing="0dip"
     android:numColumns="auto_fit"
     android:scrollbars="vertical"
+    android:listSelector="@drawable/my_list_selector_bg"
     android:verticalSpacing="0dip" />

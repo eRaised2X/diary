@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.eraisedtox94.smartdiary.model.AppPrefsManagerImpl;
 import com.eraisedtox94.smartdiary.model.DiaryEntryContentProvider;
@@ -22,10 +23,12 @@ import com.eraisedtox94.smartdiary.R;
 import com.eraisedtox94.smartdiary.presenter.mediators.IPresenterContract;
 import com.eraisedtox94.smartdiary.view.util.IViewContract;
 
+import java.util.ArrayList;
+
 /**
  * Created by spraful on 4/5/2017.
  */
-public class FragmentListOfEntries extends Fragment implements IViewContract.IListAllEntriesView {
+public class FragmentListOfEntries extends Fragment implements IViewContract.IListAllEntriesView,View.OnClickListener {
 
     IPresenterContract.IAllEntriesPresenter allEntriesPresenter;
     IAppPrefsManager appPrefsManager;
@@ -33,6 +36,11 @@ public class FragmentListOfEntries extends Fragment implements IViewContract.ILi
     private MyCursorRecyclerAdapter mMyCursorRecyclerAdapter;
     private RecyclerView recyclerView;
 
+    ImageView iv_deleteEntries;
+    ImageView iv_cancelDeleteAction;
+
+    //todo
+    View allEntriesview;
     public FragmentListOfEntries(){
 
     }
@@ -55,10 +63,16 @@ public class FragmentListOfEntries extends Fragment implements IViewContract.ILi
         allEntriesPresenter.setView(this);
         allEntriesPresenter.fillViewWithListOfEntries();
 
+        iv_deleteEntries = (ImageView)view.findViewById(R.id.iv_deleteListItems);
+        iv_cancelDeleteAction = (ImageView)view.findViewById(R.id.iv_cancelDeleteListItems);
+        iv_deleteEntries.setOnClickListener(this);
+        iv_cancelDeleteAction.setOnClickListener(this);
+
+        allEntriesview = view;
         return view;
     }
 
-    //TODO this stub can be improved ,shifted or modelled well.. probably
+    //TODO this stub can be improved /shifted /modelled well.. probably
     @Override
     public void switchToTab(int index){
         ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.pager);
@@ -66,9 +80,22 @@ public class FragmentListOfEntries extends Fragment implements IViewContract.ILi
     }
 
     @Override
-    public void deleteListItems(String[] ids) {
+    public void deleteListItems(ArrayList<String> itemlist) {
+
+        String[] ids = itemlist.toArray(new String[itemlist.size()]);
+
         getContext().getContentResolver().delete(
                 DiaryEntryContentProvider.CONTENT_URI, DiaryEntryTableUtil.COLUMN_ID, ids);
+    }
+
+    @Override
+    public void showBottomToolbar(){
+        allEntriesview.findViewById(R.id.rl_list_bottomToolbar).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideBottomToolbar(){
+        allEntriesview.findViewById(R.id.rl_list_bottomToolbar).setVisibility(View.GONE);
     }
 
     @Override
@@ -91,4 +118,18 @@ public class FragmentListOfEntries extends Fragment implements IViewContract.ILi
         recyclerView.setAdapter(mMyCursorRecyclerAdapter);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.iv_deleteListItems:
+                hideBottomToolbar();
+                mMyCursorRecyclerAdapter.handleListBottomToolbarActionDelete();
+                break;
+            case R.id.iv_cancelDeleteListItems:
+                mMyCursorRecyclerAdapter.handleListBottomToolbarActionCancelDelete();
+                break;
+            default:
+                break;
+        }
+    }
 }

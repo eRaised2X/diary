@@ -9,8 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -37,19 +35,19 @@ import com.eraisedtox94.smartdiary.model.DiaryEntryContentProvider;
 import com.eraisedtox94.smartdiary.model.DiaryEntryTableUtil;
 import com.eraisedtox94.smartdiary.view.util.IViewContract;
 import com.eraisedtox94.smartdiary.view.util.LinedEditText;
+import android.widget.PopupWindow.OnDismissListener;
 
 public class FragmentCreateNewEntry extends Fragment
         implements IViewContract.ICreateNewEntryView, View.OnClickListener,
         IEmojiconClickedListener, IEmoticonInterfaces.OnEmojiconBackspaceClickedListener {
 
 
-    private FloatingActionButton floatingActionButtonForbtnSaveEntry;
     private ImageButton imageButtonSave;
     private FloatingActionButton floatingActionButtonForCreateNew;
     private ProgressBar progressBar;
     private Typeface typefaceforContentEditText;
     private LinedEditText emojiconEditText;
-    private ImageView emojiButton;
+    //private ImageView emojiButton;
     private ImageButton imageButtonKeyBoardChange;
     private ImageButton imageButtonShowEmojiPopup;
 
@@ -61,7 +59,7 @@ public class FragmentCreateNewEntry extends Fragment
     private MyCalendarClass mMyCalendarClass;
     private IAppPrefsManager appPrefsManager;
     private IPresenterContract.ICreateNewEntryPresenter presenter;
-    private MyTextWatcher myTextWatcher;
+    //private MyTextWatcher myTextWatcher;
 
     EmojiconPopupWindow emojiconPopup;
 
@@ -92,20 +90,28 @@ public class FragmentCreateNewEntry extends Fragment
         //Will automatically set size according to the soft keyboard size
         emojiconPopup.setSizeForSoftKeyboard();
 
+        //If the emoji popup is dismissed, change emojiButton to smiley icon
+        emojiconPopup.setOnDismissListener(new OnDismissListener() {
 
-                emojiconPopup.setOnSoftKeyboardOpenCloseListener(new IEmoticonInterfaces.OnSoftKeyboardOpenCloseListener() {
+            @Override
+            public void onDismiss() {
+                changeEmojiKeyboardIcon(imageButtonKeyBoardChange, R.drawable.icon_happy_white);
+            }
+        });
 
-                    @Override
-                    public void onKeyboardOpen(int keyBoardHeight) {
+        emojiconPopup.setOnSoftKeyboardOpenCloseListener(new IEmoticonInterfaces.OnSoftKeyboardOpenCloseListener() {
 
-                    }
+            @Override
+            public void onKeyboardOpen(int keyBoardHeight) {
 
-                    @Override
-                    public void onKeyboardClose() {
-                        if (emojiconPopup.isShowing())
-                            emojiconPopup.dismiss();
-                    }
-                });
+            }
+
+            @Override
+            public void onKeyboardClose() {
+                if (emojiconPopup.isShowing())
+                    emojiconPopup.dismiss();
+            }
+        });
 
         return tabView;
 
@@ -118,15 +124,12 @@ public class FragmentCreateNewEntry extends Fragment
         presenter = new CreateEntryPresenterImpl(appPrefsManager);
 
         emojiconEditText = (LinedEditText) tabView.findViewById(R.id.emojicon_edit_text);
-        emojiButton = (ImageView) tabView.findViewById(R.id.iv_keyboard_alt_black);
+        //emojiButton = (ImageView) tabView.findViewById(R.id.iv_keyboard_alt_black);
         imageButtonKeyBoardChange = (ImageButton) tabView.findViewById(R.id.iv_keyboard_alt_black);
         imageButtonSave = (ImageButton) tabView.findViewById(R.id.iv_save_black);
         imageButtonShowEmojiPopup = (ImageButton) tabView.findViewById(R.id.iv_star_border_black);
 
         etTitle = (EditText) tabView.findViewById(R.id.et_title_diary);
-        //etContent = (EditText) tabView.findViewById(R.id.et_content_diary);
-        //floatingActionButtonForbtnSaveEntry = (FloatingActionButton) tabView.findViewById(R.id.fabBtnSave);
-        //floatingActionButtonForbtnSaveEntry.setVisibility(View.INVISIBLE);
 
         floatingActionButtonForCreateNew = (FloatingActionButton) tabView.findViewById(R.id.fabButtonNew);
         floatingActionButtonForCreateNew.setRippleColor(ContextCompat.getColor(getActivity(), R.color.colorFABNewOnClick));
@@ -136,17 +139,15 @@ public class FragmentCreateNewEntry extends Fragment
 
         // Loading Font Face
         typefaceforContentEditText = Typeface.createFromAsset(getContext().getAssets(), AppUtils.FONT_BRADLEY_RESOURCE_LOCATION);
-        //etContent.setTypeface(typefaceforContentEditText);
+        etTitle.setTypeface(typefaceforContentEditText);
         emojiconEditText.setTypeface(typefaceforContentEditText);
 
-        myTextWatcher = new MyTextWatcher();
         mMyCalendarClass = new MyCalendarClass();
-
 
         //do initializations before readFile call
         presenter.readFile(appPrefsManager.getLastOpenedFileIdFromSharedPref());
         //todo can it go up
-        rootView = tabView.findViewById(R.id.root_view);
+        rootView = tabView.findViewById(R.id.root_view_create_entry_rl);
 
     }
 
@@ -157,8 +158,6 @@ public class FragmentCreateNewEntry extends Fragment
         imageButtonKeyBoardChange.setOnClickListener(this);
         imageButtonSave.setOnClickListener(this);
         imageButtonShowEmojiPopup.setOnClickListener(this);
-        //etContent.addTextChangedListener(myTextWatcher);
-        emojiconEditText.addTextChangedListener(myTextWatcher);
     }
 
 
@@ -171,13 +170,16 @@ public class FragmentCreateNewEntry extends Fragment
                 break;
             */
             case R.id.iv_star_border_black:
+                //presenter.handleEmojiClicked(0);
+                break;
+            case R.id.iv_keyboard_alt_black:
                 //If popup is not showing => emoji keyboard is not visible, we need to show it
                 if (!emojiconPopup.isShowing()) {
 
                     //If keyboard is visible, simply show the emoji popup
                     if (emojiconPopup.isKeyBoardOpen()) {
                         emojiconPopup.showAtBottom();
-                        //changeEmojiKeyboardIcon(emojiButton, R.drawable.ic_action_keyboard);
+                        changeEmojiKeyboardIcon(imageButtonKeyBoardChange, R.drawable.icon_keyboard_white);
                     }
 
                     //else, open the text keyboard first and immediately after that show the emoji popup
@@ -187,7 +189,7 @@ public class FragmentCreateNewEntry extends Fragment
                         emojiconPopup.showAtBottomPending();
                         final InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                         inputMethodManager.showSoftInput(emojiconEditText, InputMethodManager.SHOW_IMPLICIT);
-                        //changeEmojiKeyboardIcon(emojiButton, R.drawable.ic_action_keyboard);
+                        changeEmojiKeyboardIcon(imageButtonKeyBoardChange, R.drawable.icon_happy_white);
                     }
                 }
 
@@ -195,9 +197,6 @@ public class FragmentCreateNewEntry extends Fragment
                 else {
                     emojiconPopup.dismiss();
                 }
-                break;
-            case R.id.iv_keyboard_alt_black:
-                presenter.handleEmojiClicked(0);
                 break;
             case R.id.iv_save_black:
                 presenter.handleSaveEntry();
@@ -212,20 +211,6 @@ public class FragmentCreateNewEntry extends Fragment
         }
     }
 
-    @Override
-    public void putEmoji(int emojiId) {
-        //TODO emoji may be for title as well.., handle that
-        emojiconEditText.getText().insert(emojiconEditText.getSelectionStart(), "\ud83d\ude01");
-
-        /*
-        this is probably better approach
-        String sampleSmiley = "\ud83d\ude01";
-        int start = Math.max(emojiconEditText.getSelectionStart(), 0);
-        int end = Math.max(emojiconEditText.getSelectionEnd(), 0);
-        emojiconEditText.getText().replace(Math.min(start, end), Math.max(start, end),
-                sampleSmiley, 0, sampleSmiley.length());
-        */
-    }
 
     @Override
     public void setContentReadFromFile(String content) {
@@ -238,11 +223,7 @@ public class FragmentCreateNewEntry extends Fragment
             matter = content.substring(content.indexOf(AppUtils.TITLE_CONTENT_SEPARATOR_FLAG) +
                     AppUtils.TITLE_CONTENT_SEPARATOR_FLAG.length(), content.length());
         }
-        /*if(etContent == null || etTitle == null){
-            Log.d("etContent or etTitle"," is null ,FragCreateNewEntry");
-        }
-        etContent.setText(matter);
-        */
+
         if (emojiconEditText == null || etTitle == null) {
             Log.d("emojiconEt or etTitle", " is null ,FragCreateNewEntry");
         }
@@ -271,9 +252,10 @@ public class FragmentCreateNewEntry extends Fragment
         //String textContent = etContent.getText().toString();
         String textContent = emojiconEditText.getText().toString();
         textContent = textTitle + AppUtils.TITLE_CONTENT_SEPARATOR_FLAG + textContent;
-        String dateCreatedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
+        //String dateCreatedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
+        String dateCreatedString = mMyCalendarClass.getFormattedDate();
         //todo `date modified` thing to be handled
-        String dateModifiedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
+        String dateModifiedString = "last modified on " + mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
 
         Uri uri = null;
         String id = appPrefsManager.getLastOpenedFileIdFromSharedPref();
@@ -294,7 +276,7 @@ public class FragmentCreateNewEntry extends Fragment
     }
 
 
-    //TODO these overridden methods are pretty much not used
+    //TODO these overridden methods are pretty much not used just for debugging purpose
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -354,46 +336,52 @@ public class FragmentCreateNewEntry extends Fragment
     public void onEmojiconClicked(String emojiChar) {
         //this stub should handle render emoji at pos
         Log.d("render emoji ", ":" + emojiChar);
-        int start = emojiconEditText.getSelectionStart();
-        int end = emojiconEditText.getSelectionEnd();
-        if (start < 0) {
-            emojiconEditText.append(emojiChar);
-        } else {
-            emojiconEditText.getText().replace(Math.min(start, end),
-                    Math.max(start, end), emojiChar, 0,
-                    emojiChar.length());
+        if(emojiconEditText.isFocused()){
+            int start = emojiconEditText.getSelectionStart();
+            int end = emojiconEditText.getSelectionEnd();
+            if (start < 0) {
+                emojiconEditText.append(emojiChar);
+            } else {
+                emojiconEditText.getText().replace(Math.min(start, end),
+                        Math.max(start, end), emojiChar, 0,
+                        emojiChar.length());
+            }
         }
+        //for title i.e when etContent is not focused
+        else{
+            int start = etTitle.getSelectionStart();
+            int end = etTitle.getSelectionEnd();
+            if (start < 0) {
+                etTitle.append(emojiChar);
+            } else {
+                etTitle.getText().replace(Math.min(start, end),
+                        Math.max(start, end), emojiChar, 0,
+                        emojiChar.length());
+            }
+        }
+
     }
 
     @Override
     public void onEmojiconBackspaceClicked(View v) {
-        Log.d("receiving delete","keyboard press");
+        Log.d("receiving delete", "keyboard press");
         //emulate keyboard delete key press here
-        KeyEvent event = new KeyEvent(
-                0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
-        emojiconEditText.dispatchKeyEvent(event);
+
+        if(emojiconEditText.isFocused()){
+            KeyEvent event = new KeyEvent(
+                    0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
+            emojiconEditText.dispatchKeyEvent(event);
+        }
+        //for title
+        else{
+            KeyEvent event = new KeyEvent(
+                    0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
+            etTitle.dispatchKeyEvent(event);
+        }
     }
 
-
-    //this class has stub to observe any change in contentRead in edit text
-    class MyTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            if (charSequence.length() != 0) {
-                //TODO pass this to presenter probably
-
-                //floatingActionButtonForbtnSaveEntry.setVisibility(View.VISIBLE);
-            }
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-        }
+    private void changeEmojiKeyboardIcon(ImageView iconToBeChanged, int drawableResourceId) {
+        iconToBeChanged.setImageResource(drawableResourceId);
     }
 
 }

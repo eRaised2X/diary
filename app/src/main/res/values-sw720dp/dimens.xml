@@ -1,0 +1,55 @@
+<resources>
+
+    <!--this dimen file would be used for
+    values-sw720dp          10.1” tablet 1280x800 mdpi
+    -->
+
+    <!--screen margins-->
+    <dimen name="activity_horizontal_margin">12dp</dimen>
+    <dimen name="activity_vertical_margin">12dp</dimen>
+
+
+    <!-- Text Size -->
+    <dimen name="text_size_tiny">20sp</dimen>
+    <dimen name="text_size_small">24sp</dimen>
+    <dimen name="text_size_normal">28sp</dimen>
+    <dimen name="text_size_large">32sp</dimen>
+    <dimen name="text_size_huge">38sp</dimen>
+
+    <!-- Margin & padding -->
+    <dimen name="margin_padding_tiny">10dp</dimen>
+    <dimen name="margin_padding_small">12dp</dimen>
+    <dimen name="margin_padding_normal">12dp</dimen>
+    <dimen name="margin_padding_large">14dp</dimen>
+
+    <dimen name="spacing">10dp</dimen>
+    <dimen name="icon_width_height">54dp</dimen>
+
+
+    <!--custom layout dimens-->
+    <dimen name="dimen_layout_title_height">50dp</dimen>
+    <dimen name="dimen_custom_layout_padding">12dp</dimen>
+    <dimen name="dimen_custom_layout_rect_radius">7dp</dimen>
+
+    <dimen name="diary_title_margin_top">10dp</dimen>
+    <dimen name="diary_title_margin_sides">10dp</dimen>
+
+    <!--fab create entry button-->
+    <dimen name="dimen_fab_margin">20dp</dimen>
+
+    <!--emoji keyboard default height-->
+    <dimen name="keyboard_height">280dp</dimen>
+
+
+    <!--bottom toobar height-->
+    <dimen name="bottom_toolbar_height">50dp</dimen>
+
+
+
+    <!--Tab Layout design dimens-->
+    <dimen name="tab_max_width">0dp</dimen>
+    <dimen name="dimen_tab_indicator_height">4dp</dimen>
+    <dimen name="dimen_tab_padding_start">12dp</dimen>
+    <dimen name="dimen_tab_padding_end">12dp</dimen>
+    <dimen name="dimen_tab_text_size">18sp</dimen>
+</resources>

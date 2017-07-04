@@ -1,5 +1,7 @@
 package com.eraisedtox94.smartdiary.view.main;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -8,6 +10,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.eraisedtox94.smartdiary.presenter.adapters.MyPagerAdapter;
 import com.eraisedtox94.smartdiary.R;
@@ -24,9 +29,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Lorem ipsum");//TODO this did not work
         toolbar.setLogo(R.drawable.icon_diary);
         toolbar.setTitleTextColor(ContextCompat.getColor(this,R.color.colorMyWhite));
+        toolbar.setVisibility(View.GONE);
 
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
         TabLayout.Tab tab1 = tabLayout.newTab();
         TabLayout.Tab tab2 = tabLayout.newTab();
@@ -57,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                //to close keyboard when switching tabs
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(tabLayout.getApplicationWindowToken(), 0);
             }
 
             @Override
