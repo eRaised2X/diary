@@ -7,15 +7,14 @@
     android:clickable="true"
     android:focusable="true"
     android:paddingLeft="@dimen/activity_vertical_margin"
-
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/colorFABNew"
+        android:layout_below="@+id/rl_internal_outer"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:layout_below="@+id/rl_internal_outer"/>
+        android:background="@color/colorFABNew" />
 
 
     <RelativeLayout
@@ -23,25 +22,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <RelativeLayout
             android:id="@+id/rl_internal_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@drawable/icon_list_diary">
 
-            <ImageView
-                android:id="@+id/iv_internal_list_icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:src="@color/colorFABNew" />
+            <TextView
+                android:id="@+id/tvMonthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:text="JAN"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="10sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/tvDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="6dp"
+                android:text="26"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/rl_internal_right"
-
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -52,24 +67,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
+                android:fadingEdge="vertical"
                 android:shadowColor="@color/colorShadowText"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="2"
-                android:fadingEdge="vertical"
-                android:text="Title" />
+                android:text="Title"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
+            <!--
+            <TextView
+                android:id="@+id/tvDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="26"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="10sp"
+                android:textStyle="bold"/>
+
+            -->
 
             <TextView
                 android:id="@+id/tvDateCreated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:text="created on"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="normal"
                 android:textSize="12sp"
-                android:text="created on" />
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/tvEntryId"
@@ -91,5 +118,4 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
 </RelativeLayout>

@@ -22,6 +22,7 @@
         android:clickable="true"
         android:hapticFeedbackEnabled="true"
         android:background="@drawable/button_background"
+
         android:src="@drawable/icon_happy_white" />
 
     <View

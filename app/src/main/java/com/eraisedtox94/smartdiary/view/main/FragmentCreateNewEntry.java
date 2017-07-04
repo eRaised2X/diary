@@ -252,9 +252,10 @@ public class FragmentCreateNewEntry extends Fragment
         //String textContent = etContent.getText().toString();
         String textContent = emojiconEditText.getText().toString();
         textContent = textTitle + AppUtils.TITLE_CONTENT_SEPARATOR_FLAG + textContent;
-        String dateCreatedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
+        //String dateCreatedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
+        String dateCreatedString = mMyCalendarClass.getFormattedDate();
         //todo `date modified` thing to be handled
-        String dateModifiedString = mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
+        String dateModifiedString = "last modified on " + mMyCalendarClass.getFormattedDate() + " at " + mMyCalendarClass.getFormattedTime();
 
         Uri uri = null;
         String id = appPrefsManager.getLastOpenedFileIdFromSharedPref();

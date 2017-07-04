@@ -6,76 +6,32 @@
     <LinearLayout
         android:id="@+id/my_emojis_tab"
         android:layout_width="match_parent"
-        android:layout_height="50dip"
+        android:layout_height="@dimen/bottom_toolbar_height"
         android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/my_emojis_tab_1_people"
+        <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="center"
-            android:src="@drawable/icon_happy_white" />
+            android:layout_weight="1">
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#888888" />
+            <ImageButton
+                android:id="@+id/my_emojis_tab_1_people"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_happy_dark" />
+            <View
+                android:id="@+id/view_emojiconTab1Marker"
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorPrimaryDark"
+                android:visibility="visible" />
 
-        <ImageButton
-            android:id="@+id/my_emojis_tab_2_food"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="center"
-            android:src="@drawable/icon_plum_dark" />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#888888" />
-
-        <ImageButton
-            android:id="@+id/my_emojis_tab_3_nature"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="center"
-            android:src="@drawable/icon_dog_dark" />
-
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#888888" />
-
-        <ImageButton
-            android:id="@+id/my_emojis_tab_4_sports"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="center"
-            android:src="@drawable/icon_soccer_dark" />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#888888" />
-
-        <ImageButton
-            android:id="@+id/my_emojis_tab_5_transport"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="center"
-            android:src="@drawable/icon_car_dark" />
-
+        </RelativeLayout>
 
         <View
             android:layout_width="1px"
@@ -83,41 +39,185 @@
             android:background="#888888" />
 
 
-        <ImageButton
-            android:id="@+id/my_emojis_tab_6_daily"
+        <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@drawable/icon_bulb_dark" />
+            android:layout_weight="1">
 
+            <ImageButton
+                android:id="@+id/my_emojis_tab_2_food"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_plum_light" />
+            <View
+                android:id="@+id/view_emojiconTab2Marker"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="2px"
+                android:visibility="invisible"
+                android:background="@color/colorPrimaryDark" />
+        </RelativeLayout>
 
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:background="#888888" />
 
-        <ImageButton
-            android:id="@+id/my_emojis_tab_7_symbols"
+
+        <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:scaleType="center"
-            android:src="@drawable/icon_spade_dark" />
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/my_emojis_tab_3_nature"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_dog_light" />
+            <View
+                android:id="@+id/view_emojiconTab3Marker"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="2px"
+                android:visibility="invisible"
+                android:background="@color/colorPrimaryDark" />
+        </RelativeLayout>
 
         <View
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:background="#888888" />
 
-        <ImageButton
-            android:id="@+id/my_emojis_tab_8_backspace"
+
+        <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@drawable/ic_emojicon_keyboard_delete_drawable" />
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/my_emojis_tab_4_sports"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_soccer_light" />
+            <View
+                android:id="@+id/view_emojiconTab4Marker"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="2px"
+                android:visibility="invisible"
+                android:background="@color/colorPrimaryDark" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#888888" />
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/my_emojis_tab_5_transport"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_car_light" />
+            <View
+                android:id="@+id/view_emojiconTab5Marker"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="2px"
+                android:visibility="invisible"
+                android:background="@color/colorPrimaryDark" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#888888" />
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/my_emojis_tab_6_daily"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_bulb_light" />
+            <View
+                android:id="@+id/view_emojiconTab6Marker"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="2px"
+                android:visibility="invisible"
+                android:background="@color/colorPrimaryDark" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#888888" />
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/my_emojis_tab_7_symbols"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/icon_spade_light" />
+            <View
+                android:id="@+id/view_emojiconTab7Marker"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_height="2px"
+                android:visibility="invisible"
+                android:background="@color/colorPrimaryDark" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#888888" />
+
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/my_emojis_tab_8_backspace"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/ic_emojicon_keyboard_delete_drawable" />
+        </RelativeLayout>
 
     </LinearLayout>
 

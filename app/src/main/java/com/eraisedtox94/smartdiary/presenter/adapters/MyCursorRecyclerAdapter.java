@@ -68,9 +68,18 @@ public class MyCursorRecyclerAdapter extends RecyclerView.Adapter<MyCursorRecycl
                 TextView tv1 = (TextView) view.findViewById(R.id.tvEntryId);
                 TextView tv2 = (TextView) view.findViewById(R.id.tvDiaryTitle);
                 TextView tv3 = (TextView) view.findViewById(R.id.tvDateCreated);
+                TextView tv4 = (TextView) view.findViewById(R.id.tvDateText);
+                TextView tv5 = (TextView) view.findViewById(R.id.tvMonthText);
+
                 tv1.setText(cursor.getString(0));
                 tv2.setText(cursor.getString(1));
-                tv3.setText(cursor.getString(2));
+
+                String dateString = cursor.getString(2);
+                String []splitDate = dateString.split("-"); //dateString is in format like 21-JUN-2017
+
+                tv3.setText(dateString);
+                tv4.setText(splitDate[0]);
+                tv5.setText(splitDate[1]);
 
                 tv2.setTypeface(blokletters_viltstift_font);
                 tv3.setTypeface(blokletters_ballpen_font);
@@ -88,7 +97,8 @@ public class MyCursorRecyclerAdapter extends RecyclerView.Adapter<MyCursorRecycl
         marker = (ImageView) view.findViewById(R.id.iv_internal_ItemMarkedIndicator);
         if(isUserInMultipleSelectionMode){
 
-            if(marker.getVisibility() == View.INVISIBLE){
+            if(marker.getVisibility() == View.
+                    INVISIBLE){
                 items.add(clickedItemId);
                 Log.d("adding=", clickedItemId +"");
                 marker.setVisibility(View.VISIBLE);

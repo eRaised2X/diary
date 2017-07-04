@@ -26,7 +26,7 @@
             android:background="@android:color/transparent"
             android:ems="10"
             android:fadingEdge="vertical"
-            android:gravity="top"
+            android:gravity="bottom"
             android:hint="@string/title_hint"
             android:inputType="textPersonName"
             android:padding="@dimen/margin_padding_small"
@@ -35,7 +35,7 @@
             android:shadowDy="1"
             android:shadowRadius="2"
             android:textCursorDrawable="@drawable/color_cursor"
-            android:textSize="@dimen/text_size_large"
+            android:textSize="@dimen/text_size_normal"
             android:typeface="sans" />
     </RelativeLayout>
 
