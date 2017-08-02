@@ -5,29 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/tabfragment3xml">
-    <!--
-        <TextView
-            android:id="@+id/tv_fragment3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Tab 3"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
-
-        <Button
-            android:text="Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            android:layout_above="@+id/tv_fragment3"
-            android:layout_centerHorizontal="true" />
-    -->
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/rv"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="23dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
-    </RelativeLayout>
+    <com.eraisedtox94.smartdiary.view.util.MyCustomCalendarView
+        xmlns:calendarNS="http://schemas.android.com/apk/res/com.eraisedtox94.smartdiary"
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        calendarNS:dateFormat="MMMM yyyy"/>
+</RelativeLayout>

@@ -52,4 +52,13 @@
     <!--background color for smiley keyboard-->
     <color name="colorSmileyBackground">#f5f5f5</color>
 
+    <!--colors for calendar view-->
+    <color name="summer">#44eebd82</color>
+    <color name="fall">#44d8d27e</color>
+    <color name="winter">#44a1c1da</color>
+    <color name="spring">#448da64b</color>
+
+    <color name="greyed_out">#cbcbcb</color>
+    <color name="today">#ababab</color>
+
 </resources>
