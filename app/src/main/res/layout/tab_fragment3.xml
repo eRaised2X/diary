@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/tabfragment3xml">
-    <com.eraisedtox94.smartdiary.view.util.MyCustomCalendarView
-        xmlns:calendarNS="http://schemas.android.com/apk/res/com.eraisedtox94.smartdiary"
-        android:id="@+id/calendar_view"
+    <!--<com.eraisedtox94.smartdiary.view.util.MyCustomCalendarLayout
+        android:id="@+id/my_calendar_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        calendarNS:dateFormat="MMMM yyyy"/>
+        android:layout_height="match_parent"/>
+        -->
 </RelativeLayout>

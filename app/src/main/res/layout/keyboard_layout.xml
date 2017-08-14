@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_custom_keypad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:id="@+id/custom_keypad"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/keyboard_height"
+        android:background="@color/colorMyWhite"
+        android:divider="@drawable/custom_keypad_separator"
+        android:orientation="vertical"
+        android:showDividers="beginning|middle|end">
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/custom_keypad_row">
+
+            <TextView
+                android:id="@+id/keypad_key1"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="1" />
+
+            <TextView
+                android:id="@+id/keypad_key2"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="2" />
+
+            <TextView
+                android:id="@+id/keypad_key3"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="3" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/custom_keypad_row">
+
+            <TextView
+                android:id="@+id/keypad_key4"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="4" />
+
+            <TextView
+                android:id="@+id/keypad_key5"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="5" />
+
+            <TextView
+                android:id="@+id/keypad_key6"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="6" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/custom_keypad_row">
+
+            <TextView
+                android:id="@+id/keypad_key7"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="7" />
+
+            <TextView
+                android:id="@+id/keypad_key8"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="8" />
+
+            <TextView
+                android:id="@+id/keypad_key9"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="9" />
+        </TableRow>
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/custom_keypad_row">
+
+            <ImageView
+                android:id="@+id/iv_keypad_key_reset"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_cross"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/keypad_key0"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:text="0" />
+
+            <ImageView
+                android:id="@+id/iv_keypad_key_del"
+                android:layout_height="match_parent"
+                style="@style/keypad_num_key"
+                android:onClick="customKeypadClick"
+                android:src="@drawable/icon_clear"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
