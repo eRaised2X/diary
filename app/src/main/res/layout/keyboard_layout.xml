@@ -15,9 +15,9 @@
         android:showDividers="beginning|middle|end">
 
         <TableRow
+            style="@style/custom_keypad_row"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/custom_keypad_row">
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/keypad_key1"
@@ -39,9 +39,9 @@
         </TableRow>
 
         <TableRow
+            style="@style/custom_keypad_row"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/custom_keypad_row">
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/keypad_key4"
@@ -63,9 +63,9 @@
         </TableRow>
 
         <TableRow
+            style="@style/custom_keypad_row"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/custom_keypad_row">
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/keypad_key7"
@@ -87,17 +87,15 @@
         </TableRow>
 
         <TableRow
+            style="@style/custom_keypad_row"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/custom_keypad_row">
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/iv_keypad_key_reset"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_cross"
                 style="@style/keypad_num_key"
                 android:onClick="customKeypadClick"
-                android:layout_gravity="center"/>
+                android:src="@drawable/icon_cross2" />
 
             <TextView
                 android:id="@+id/keypad_key0"
@@ -106,11 +104,10 @@
                 android:text="0" />
 
             <ImageView
-                android:id="@+id/iv_keypad_key_del"
-                android:layout_height="match_parent"
+                android:id="@+id/iv_keypad_key_done"
                 style="@style/keypad_num_key"
                 android:onClick="customKeypadClick"
-                android:src="@drawable/icon_clear"/>
+                android:src="@drawable/icon_ok" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

@@ -7,4 +7,8 @@
     <string name="content_hint">why so?</string>
     <string name="title_hint">how\'s your mood</string>
 
+    <!--for facebook login integration-->
+    <string name="facebook_app_id">1765874526798863</string>
+    <string name="fb_login_protocol_scheme">fb1765874526798863</string>
+
 </resources>

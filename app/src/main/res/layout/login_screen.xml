@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <RelativeLayout
+        android:id="@+id/rl_diary_icon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50">
+
+        <ImageView
+            android:id="@+id/iv_diary_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/icon_logo2" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_diary_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tvTitleFirstHalf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="smart"
+                android:textColor="@color/colorMyWhite"
+                android:textSize="@dimen/diary_title_text" />
+
+            <TextView
+                android:id="@+id/tvTitleSecondHalf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tvTitleFirstHalf"
+                android:text="diary"
+                android:textColor="@color/colorMyWhite"
+                android:textSize="@dimen/diary_title_text" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:gravity="center"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/signup_login_btn_height"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/login_signup_button"
+                    android:text="LOGIN"
+                    android:textColor="@color/colorMyWhite"
+                    android:textSize="@dimen/signup_login_btn_text" />
+
+                <Button
+                    android:id="@+id/btn_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/signup_login_btn_height"
+                    android:layout_below="@+id/btn_login"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/signup_login_btn_margin"
+                    android:background="@drawable/login_signup_button"
+                    android:text="SIGN UP"
+                    android:textColor="@color/colorMyWhite"
+                    android:textSize="@dimen/signup_login_btn_text" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:gravity="center"></RelativeLayout>
+
+        </LinearLayout>
+        <!--<com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_signup" />
+            -->
+    </RelativeLayout>
+
+</LinearLayout>

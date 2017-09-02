@@ -1,6 +1,7 @@
 package com.eraisedtox94.smartdiary.view.main;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,16 +12,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.eraisedtox94.smartdiary.R;
 
 /**
  * Created by spraful on 04-08-2017.
  */
 public class LockScreen extends Activity{
-
-    GridView gridview ;
-    Button btntmp;
 
     ImageView iv1;
     ImageView iv1b;
@@ -31,6 +28,8 @@ public class LockScreen extends Activity{
     ImageView iv4;
     ImageView iv4b;
     ImageView ivClearPasscode;
+    ImageView ivPasscodeDone;
+
 
     ImageView [] ivArray = new ImageView[4];
     ImageView [] ivArray2 = new ImageView[4];
@@ -42,8 +41,6 @@ public class LockScreen extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lock_screen);
-        //gridview = (GridView)findViewById(R.id.gv_num_keypad);
-        btntmp =(Button)findViewById(R.id.btnGvTmp);
 
         iv1 = (ImageView)findViewById(R.id.ivPasscode1);
         iv1b = (ImageView)findViewById(R.id.ivPasscode1b);
@@ -61,27 +58,16 @@ public class LockScreen extends Activity{
         ivArray2 = new ImageView[]{iv1b,iv2b,iv3b,iv4b};
 
         ivClearPasscode =(ImageView)findViewById(R.id.iv_keypad_key_reset);
+        ivPasscodeDone =(ImageView)findViewById(R.id.iv_keypad_key_done);
 
-        //String[] numbers  = {"1","2","3","4","5","6","7","8","9","","0",""};
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                //android.R.layout.simple_list_item_1, numbers);
 
-        //gridview.setAdapter(adapter);
-
-        /*gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(getApplicationContext(),(position+1)+"", Toast.LENGTH_SHORT).show();
-                updatePasscodeArray(position+1,0);
-            }
-        });*/
-
-        btntmp.setOnClickListener(new View.OnClickListener(){
+        ivPasscodeDone.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 //Toast.makeText(getApplicationContext(), "You made a mess", Toast.LENGTH_LONG).show();
-                //Intent myIntent = new Intent(LockScreen.this, MainActivity.class);
-                //startActivity(myIntent);
+                Intent myIntent = new Intent(LockScreen.this, MainActivity.class);
+                startActivity(myIntent);
+
                 String str= pass[0] +":"+ pass[1]+":"+ pass[2]+ ":"+ pass[3];
                 Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG).show();
             }

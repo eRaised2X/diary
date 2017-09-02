@@ -50,4 +50,17 @@
     <dimen name="dimen_tab_padding_start">10dp</dimen>
     <dimen name="dimen_tab_padding_end">10dp</dimen>
     <dimen name="dimen_tab_text_size">16sp</dimen>
+
+
+
+    <!--dimension for signup_login button-->
+    <dimen name="signup_login_btn_width">320dp</dimen>
+    <dimen name="signup_login_btn_height">45dp</dimen>
+    <dimen name="signup_login_btn_margin">27dp</dimen>
+    <dimen name="signup_login_btn_text">22sp</dimen>
+
+
+    <!--dimension for diary title main page-->
+    <dimen name="diary_title_text">30sp</dimen>
+
 </resources>
