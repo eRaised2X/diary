@@ -27,12 +27,23 @@
 
 
         <!--
+        login signup screen activity
+        -->
+        <activity android:name="com.eraisedtox94.smartdiary.view.main.LoginSignupScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <!--
         login screen activity
         -->
         <activity android:name="com.eraisedtox94.smartdiary.view.main.LoginScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
