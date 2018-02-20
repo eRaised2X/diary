@@ -15,4 +15,10 @@ public class AppConstants {
     // English = int 0
     public static int DEFAULT_LANGUAGE = 0;
 
+    //login url
+    public static String URL_LOGIN = "http://192.168.0.102/diary_login_api/login.php";
+
+    //register url
+    public static String URL_REGISTER = "http://192.168.0.102/diary_login_api/register.php";
+
 }

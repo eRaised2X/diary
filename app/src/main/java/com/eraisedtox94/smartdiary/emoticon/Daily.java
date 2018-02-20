@@ -8,6 +8,7 @@ public class Daily {
 
     public static MyEmojicon[] getData(){
         MyEmojicon []DATA  = {
+                //TODO ordering and grouping of emojis has to be done.
                 new MyEmojicon(getEmojiByUnicode(0x2709)),
                 new MyEmojicon(getEmojiByUnicode(0x1F6AC)),
                 new MyEmojicon(getEmojiByUnicode(0x1F6AD)),
