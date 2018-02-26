@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.eraisedtox94.smartdiary.R;
+import com.eraisedtox94.smartdiary.app.SessionManager;
+import com.eraisedtox94.smartdiary.business.UserLoginBusiness;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
@@ -21,11 +23,6 @@ import com.facebook.login.widget.LoginButton;
  */
 
 public class LoginSignupScreen extends AppCompatActivity {
-
-
-    private TextView info;
-    private LoginButton loginButton;
-    private CallbackManager callbackManager;
 
     private Button btn_login;
     private Button btn_signup;
@@ -37,6 +34,12 @@ public class LoginSignupScreen extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_signup_screen);
+        SessionManager session = new SessionManager(getApplicationContext());
+        if(session.isLoggedIn()){
+            Intent intent = new Intent(LoginSignupScreen.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
 
         tvTitleFirstHalf =  (TextView)findViewById(R.id.tvTitleFirstHalf);
@@ -48,57 +51,8 @@ public class LoginSignupScreen extends AppCompatActivity {
         tvTitleFirstHalf.setTypeface(Typeface.createFromAsset(this.getAssets(),"fonts/blokletters_balpen.ttf"));
         tvTitleSecondHalf.setTypeface(Typeface.createFromAsset(this.getAssets(),"fonts/blokletters_balpen.ttf"));
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
-
-        //loginButton = (LoginButton)findViewById(R.id.login_button);
-        //loginButton.setReadPermissions("email");
-        info = (TextView)findViewById(R.id.info);
-
-        //String str = AccessToken.getCurrentAccessToken().getToken();
-        //String name = Profile.getCurrentProfile().getName();
-        //Log.d("fb token earlier:",str);
-        //Log.d("fb name:",name);
-        //info.setText(str);
-
-        // Callback registration
-        /*loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-                Log.d("fb login","success");
-                info.setText(
-                        "User ID: "
-                                + loginResult.getAccessToken().getUserId()
-                                + "\n" +
-                                "Auth Token: "
-                                + loginResult.getAccessToken().getToken()
-                );
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-                Log.d("fb login","cancelled");
-                info.setText("Login attempt canceled.");
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-                Log.d("fb login","error occured");
-                info.setText("Login attempt failed.");
-            }
-        });*/
-
-
         btn_signup.setOnTouchListener(new MyButtonTouchListener(btn_signup)) ;
         btn_login.setOnTouchListener(new MyButtonTouchListener(btn_login)) ;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     public class MyButtonTouchListener implements View.OnTouchListener{
