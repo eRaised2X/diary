@@ -13,10 +13,6 @@ import android.widget.Toast;
 
 import com.eraisedtox94.smartdiary.R;
 import com.eraisedtox94.smartdiary.app.SessionManager;
-import com.eraisedtox94.smartdiary.business.UserLoginBusiness;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.login.widget.LoginButton;
 
 /**
  * Created by spraful on 26-08-2017.
@@ -72,8 +68,16 @@ public class LoginSignupScreen extends AppCompatActivity {
                     myButton.setBackgroundResource(R.drawable.login_signup_btn_enabled);
                     //v.invalidate();
                     Toast.makeText(getBaseContext(),myButton.getText(),Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginSignupScreen.this,LoginScreen.class);
-                    startActivity(intent);
+                    if(v.getId() == R.id.btn_login){
+                        Intent intent = new Intent(LoginSignupScreen.this,LoginScreen.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        //Intent intent = new Intent(LoginSignupScreen.this,SignupScreen.class);
+                        //startActivity(intent);
+                        //finish();
+                    }
                     break;
                 }
                 case MotionEvent.ACTION_UP: {

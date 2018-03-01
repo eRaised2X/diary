@@ -14,13 +14,11 @@ import android.widget.Toast;
 
 import com.eraisedtox94.smartdiary.R;
 import com.eraisedtox94.smartdiary.app.SessionManager;
-import com.eraisedtox94.smartdiary.business.UserLoginBusiness;
-import com.facebook.AccessToken;
+import com.eraisedtox94.smartdiary.business.UserSignUpLoginBusiness;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -120,7 +118,7 @@ public class LoginScreen extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.show();
-        if(UserLoginBusiness.getInstance().userLogin(username,password,getApplicationContext())){
+        if(UserSignUpLoginBusiness.getInstance().userLogin(username,password,getApplicationContext())){
             TakeMeHome();
         }
         pDialog.dismiss();

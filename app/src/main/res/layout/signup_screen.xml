@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMyWhite"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+    <RelativeLayout
+        android:id="@+id/rl_diary_icon_signup"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="35">
+
+        <ImageView
+            android:id="@+id/iv_diary_icon_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_logo2_dark" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="65"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="80"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:weightSum="100">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:weightSum="100"
+                android:orientation="vertical"
+                android:gravity="top">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="33">
+                    <TextView
+                        android:id="@+id/tvUserNameSignupScreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="USERNAME"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etUNameSignupScreen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_background"
+                        android:clickable="true"
+                        android:hint="Email"
+                        android:inputType="textPersonName"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="5dp"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="33">
+                    <TextView
+                        android:id="@+id/tvPwdSignupScreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="PASSWORD"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etPwdSignupScreen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_background"
+                        android:gravity="left"
+                        android:hint="password"
+                        android:inputType="textPassword"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="5dp"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_weight="33">
+                    <TextView
+                        android:id="@+id/tvRePwdSignupScreen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="CONFIRM PASSWORD"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/etRePwdSignupScreen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvRePwdSignupScreen"
+                        android:background="@drawable/et_background"
+                        android:gravity="left"
+                        android:hint="confirm password"
+                        android:inputType="textPassword"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="0dp"
+                        android:paddingTop="5dp"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:paddingTop="5dp">
+
+                <Button
+                    android:id="@+id/btn_do_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/signup_login_btn_height"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/login_button"
+                    android:text="CREATE ACCOUNT"
+                    android:textColor="@color/colorMyWhite"
+                    android:textSize="@dimen/signup_login_btn_text" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/btn_do_signup"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:id="@+id/tvSignupAlreadyAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:text="Already Have An Account? Login Here"
+                    android:layout_below="@+id/btn_do_signup"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12sp"
+                    android:clickable="true"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"></LinearLayout>
+    </LinearLayout>
+</LinearLayout>
